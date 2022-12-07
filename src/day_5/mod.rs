@@ -47,22 +47,30 @@ fn process_input_first(raw: &str) -> String {
         stack.reverse();
     });
 
-    second_half.split("\n").map(|line| {
-        let command_raw = line.split(" ").collect::<Vec<&str>>();
-        (command_raw[1].parse::<usize>().unwrap(), command_raw[3].parse::<usize>().unwrap() - 1, command_raw[5].parse::<usize>().unwrap() - 1)
-    }).for_each(|(count, from, to)| {
-        let stack_size = stacks[from].len();
-        let mut crates = stacks[from].split_off(stack_size - count);
-        crates.reverse();
-        let mut crates = crates.to_vec();
-        stacks[to].append(crates.as_mut());
-    });
+    second_half
+        .split("\n")
+        .map(|line| {
+            let command_raw = line.split(" ").collect::<Vec<&str>>();
+            (
+                command_raw[1].parse::<usize>().unwrap(),
+                command_raw[3].parse::<usize>().unwrap() - 1,
+                command_raw[5].parse::<usize>().unwrap() - 1,
+            )
+        })
+        .for_each(|(count, from, to)| {
+            let stack_size = stacks[from].len();
+            let mut crates = stacks[from].split_off(stack_size - count);
+            crates.reverse();
+            let mut crates = crates.to_vec();
+            stacks[to].append(crates.as_mut());
+        });
 
-    stacks.iter_mut().map(|stack| {
-        stack.pop().unwrap()
-    }).fold("".to_string(), |message, ch| {
-        format!("{}{}",message, ch).to_owned()
-    })
+    stacks
+        .iter_mut()
+        .map(|stack| stack.pop().unwrap())
+        .fold("".to_string(), |message, ch| {
+            format!("{}{}", message, ch).to_owned()
+        })
 }
 
 fn process_input_second(raw: &str) -> String {
@@ -92,19 +100,27 @@ fn process_input_second(raw: &str) -> String {
         stack.reverse();
     });
 
-    second_half.split("\n").map(|line| {
-        let command_raw = line.split(" ").collect::<Vec<&str>>();
-        (command_raw[1].parse::<usize>().unwrap(), command_raw[3].parse::<usize>().unwrap() - 1, command_raw[5].parse::<usize>().unwrap() - 1)
-    }).for_each(|(count, from, to)| {
-        let stack_size = stacks[from].len();
-        let mut crates = stacks[from].split_off(stack_size - count);
-        let mut crates = crates.to_vec();
-        stacks[to].append(crates.as_mut());
-    });
+    second_half
+        .split("\n")
+        .map(|line| {
+            let command_raw = line.split(" ").collect::<Vec<&str>>();
+            (
+                command_raw[1].parse::<usize>().unwrap(),
+                command_raw[3].parse::<usize>().unwrap() - 1,
+                command_raw[5].parse::<usize>().unwrap() - 1,
+            )
+        })
+        .for_each(|(count, from, to)| {
+            let stack_size = stacks[from].len();
+            let mut crates = stacks[from].split_off(stack_size - count);
+            let mut crates = crates.to_vec();
+            stacks[to].append(crates.as_mut());
+        });
 
-    stacks.iter_mut().map(|stack| {
-        stack.pop().unwrap()
-    }).fold("".to_string(), |message, ch| {
-        format!("{}{}",message, ch).to_owned()
-    })
+    stacks
+        .iter_mut()
+        .map(|stack| stack.pop().unwrap())
+        .fold("".to_string(), |message, ch| {
+            format!("{}{}", message, ch).to_owned()
+        })
 }
