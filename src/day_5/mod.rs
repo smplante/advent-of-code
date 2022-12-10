@@ -35,11 +35,11 @@ fn process_input_first(raw: &str) -> String {
 
         for char in chars.skip(1).step_by(4) {
             if char == ' ' {
-                stack = stack + 1;
+                stack += 1;
                 continue;
             }
             stacks[stack].push(char);
-            stack = stack + 1;
+            stack += 1;
         }
     }
 
@@ -88,11 +88,11 @@ fn process_input_second(raw: &str) -> String {
 
         for char in chars.skip(1).step_by(4) {
             if char == ' ' {
-                stack = stack + 1;
+                stack += 1;
                 continue;
             }
             stacks[stack].push(char);
-            stack = stack + 1;
+            stack += 1;
         }
     }
 
@@ -112,7 +112,7 @@ fn process_input_second(raw: &str) -> String {
         })
         .for_each(|(count, from, to)| {
             let stack_size = stacks[from].len();
-            let mut crates = stacks[from].split_off(stack_size - count);
+            let crates = stacks[from].split_off(stack_size - count);
             let mut crates = crates.to_vec();
             stacks[to].append(crates.as_mut());
         });

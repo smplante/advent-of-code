@@ -37,7 +37,7 @@ fn process_input_first(raw: &str) -> u32 {
         {
             break;
         }
-        pos = pos + 1;
+        pos += 1;
     }
 
     pos + size as u32
@@ -52,7 +52,7 @@ fn process_input_second(raw: &str) -> u32 {
         if window.iter().collect::<HashSet<&char>>().len() == size {
             break;
         }
-        pos = pos + 1;
+        pos += 1;
     }
 
     pos + size as u32

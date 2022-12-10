@@ -45,7 +45,7 @@ fn collect_calories(list: Vec<&str>) -> (u32, u32, u32) {
             } else if elves[elf] >= top_3 {
                 top_3 = elves[elf]
             }
-            elf = elf + 1;
+            elf += 1;
             continue;
         }
 
@@ -53,9 +53,9 @@ fn collect_calories(list: Vec<&str>) -> (u32, u32, u32) {
         if elves.len() == elf {
             elves.push(0);
         }
-        elves[elf] = elves[elf] + calories;
+        elves[elf] += calories;
     }
-    elf = elf - 1;
+    elf -= 1;
     if elves[elf] > top_1 {
         top_3 = top_2;
         top_2 = top_1;
