@@ -5,15 +5,15 @@ pub fn run() {
     println!("Advent of Code Day 05");
     println!("---------------------\n");
 
-    let result_test_first = process_input_first(inputs::test);
-    let result_test_second = process_input_second(inputs::test);
+    let result_test_first = process_input_first(inputs::TEST);
+    let result_test_second = process_input_second(inputs::TEST);
     println!(
         "test:   first half: {:?}, second half: {:?}",
         result_test_first, result_test_second
     );
 
-    let result_actual_first = process_input_first(inputs::actual);
-    let result_actual_second = process_input_second(inputs::actual);
+    let result_actual_first = process_input_first(inputs::ACTUAL);
+    let result_actual_second = process_input_second(inputs::ACTUAL);
     println!(
         "actual: first half: {:?}, second half: {:?}\n",
         result_actual_first, result_actual_second

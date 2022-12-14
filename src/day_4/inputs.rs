@@ -1,11 +1,11 @@
-pub const test: &str = "2-4,6-8
+pub const TEST: &str = "2-4,6-8
 2-3,4-5
 5-7,7-9
 2-8,3-7
 6-6,4-6
 2-6,4-8";
 
-pub const actual: &str = "1-2,2-96
+pub const ACTUAL: &str = "1-2,2-96
 17-75,14-75
 33-92,93-93
 18-18,18-83

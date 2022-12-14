@@ -5,14 +5,14 @@ pub fn run() {
     println!("Advent of Code Day 02");
     println!("---------------------\n");
 
-    let result_test_first = calculate_strategy(process_input_first(inputs::test));
-    let result_test_second = calculate_strategy(process_input_second(inputs::test));
+    let result_test_first = calculate_strategy(process_input_first(inputs::TEST));
+    let result_test_second = calculate_strategy(process_input_second(inputs::TEST));
     println!(
         "test:   first half: {}, second half: {}",
         result_test_first, result_test_second
     );
-    let result_actual_first = calculate_strategy(process_input_first(inputs::actual));
-    let result_actual_second = calculate_strategy(process_input_second(inputs::actual));
+    let result_actual_first = calculate_strategy(process_input_first(inputs::ACTUAL));
+    let result_actual_second = calculate_strategy(process_input_second(inputs::ACTUAL));
     println!(
         "actual: first half: {}, second half: {}",
         result_actual_first, result_actual_second

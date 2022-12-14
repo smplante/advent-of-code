@@ -1,4 +1,4 @@
-pub const test: &str = "$ cd /
+pub const TEST: &str = "$ cd /
 $ ls
 dir a
 14848514 b.txt
@@ -22,7 +22,7 @@ $ ls
 5626152 d.ext
 7214296 k";
 
-pub const actual: &str = "$ cd /
+pub const ACTUAL: &str = "$ cd /
 $ ls
 dir bgmjrlz
 dir bhp

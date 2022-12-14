@@ -7,11 +7,11 @@ pub fn run() {
     println!("Advent of Code Day 03");
     println!("---------------------\n");
 
-    let result_test_first = process_input_first(inputs::test)
+    let result_test_first = process_input_first(inputs::TEST)
         .iter()
         .map(|chars| chars.iter().map(char_to_priority).sum::<u32>())
         .sum::<u32>();
-    let result_test_second = process_input_second(inputs::test)
+    let result_test_second = process_input_second(inputs::TEST)
         .iter_mut()
         .map(|elves| {
             let mut common = HashSet::new();
@@ -28,11 +28,11 @@ pub fn run() {
         result_test_first, result_test_second
     );
 
-    let result_actual_first = process_input_first(inputs::actual)
+    let result_actual_first = process_input_first(inputs::ACTUAL)
         .iter()
         .map(|chars| chars.iter().map(char_to_priority).sum::<u32>())
         .sum::<u32>();
-    let result_actual_second = process_input_second(inputs::actual)
+    let result_actual_second = process_input_second(inputs::ACTUAL)
         .iter_mut()
         .map(|elves| {
             let mut common = HashSet::new();

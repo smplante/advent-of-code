@@ -1,8 +1,8 @@
-pub const test: &str = "A Y
+pub const TEST: &str = "A Y
 B X
 C Z";
 
-pub const actual: &str = "C Z
+pub const ACTUAL: &str = "C Z
 C Z
 A X
 A X

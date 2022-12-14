@@ -1,4 +1,4 @@
-pub const test: &str = "    [D]    
+pub const TEST: &str = "    [D]    
 [N] [C]    
 [Z] [M] [P]
  1   2   3 
@@ -8,7 +8,7 @@ move 3 from 1 to 3
 move 2 from 2 to 1
 move 1 from 1 to 2";
 
-pub const actual: &str = "    [P]                 [Q]     [T]
+pub const ACTUAL: &str = "    [P]                 [Q]     [T]
 [F] [N]             [P] [L]     [M]
 [H] [T] [H]         [M] [H]     [Z]
 [M] [C] [P]     [Q] [R] [C]     [J]

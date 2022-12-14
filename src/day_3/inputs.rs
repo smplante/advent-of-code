@@ -1,11 +1,11 @@
-pub const test: &str = "vJrwpWtwJgWrhcsFMMfFFhFp
+pub const TEST: &str = "vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw";
 
-pub const actual: &str = "WwcsbsWwspmFTGVV
+pub const ACTUAL: &str = "WwcsbsWwspmFTGVV
 RHtMDHdSMnDBGMSDvnvDjtmpTpjTFggpmjmTFggTjmpP
 vtCSGRMBDzHddvBHBzRhrlcZhlLzWNlqblhzcr
 shhszHNHHZWqSzVNdClMjlFjBBbNTB

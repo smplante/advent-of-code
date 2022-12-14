@@ -5,13 +5,13 @@ pub fn run() {
     println!("Advent of Code Day 01");
     println!("---------------------\n");
 
-    let result_test = collect_calories(process_input(inputs::test));
+    let result_test = collect_calories(process_input(inputs::TEST));
     println!(
         "test:   first half: {}, second half: {}",
         result_test.0,
         result_test.0 + result_test.1 + result_test.2
     );
-    let result_actual = collect_calories(process_input(inputs::actual));
+    let result_actual = collect_calories(process_input(inputs::ACTUAL));
     println!(
         "actual: first half: {}, second half: {}",
         result_actual.0,

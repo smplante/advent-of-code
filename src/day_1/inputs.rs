@@ -1,4 +1,4 @@
-pub const test: &str = "1000
+pub const TEST: &str = "1000
 2000
 3000
 
@@ -14,7 +14,7 @@ pub const test: &str = "1000
 10000
 ";
 
-pub const actual: &str = "2991
+pub const ACTUAL: &str = "2991
 13880
 13279
 1514
