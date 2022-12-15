@@ -3,9 +3,9 @@ use std::collections::{HashMap};
 mod inputs;
 
 pub fn run() {
-    println!("---------------------");
-    println!("Advent of Code Day 07");
-    println!("---------------------\n");
+    println!("--------------------------");
+    println!("Advent of Code 2022 Day 07");
+    println!("--------------------------\n");
 
     let result_test_first = process_input_first(inputs::TEST);
     let result_test_second = process_input_second(inputs::TEST);

@@ -1,9 +1,9 @@
 mod inputs;
 
 pub fn run() {
-    println!("---------------------");
-    println!("Advent of Code Day 01");
-    println!("---------------------\n");
+    println!("--------------------------");
+    println!("Advent of Code 2022 Day 01");
+    println!("--------------------------\n");
 
     let result_test = collect_calories(process_input(inputs::TEST));
     println!(

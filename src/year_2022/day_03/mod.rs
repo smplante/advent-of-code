@@ -3,9 +3,9 @@ use std::collections::HashSet;
 mod inputs;
 
 pub fn run() {
-    println!("---------------------");
-    println!("Advent of Code Day 03");
-    println!("---------------------\n");
+    println!("--------------------------");
+    println!("Advent of Code 2022 Day 03");
+    println!("--------------------------\n");
 
     let result_test_first = process_input_first(inputs::TEST)
         .iter()
