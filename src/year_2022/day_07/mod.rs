@@ -1,4 +1,4 @@
-use std::collections::{HashMap};
+use std::collections::HashMap;
 
 mod inputs;
 
@@ -184,9 +184,7 @@ fn process_input_second(raw: &str) -> u32 {
     let dir_to_remove = dir_sizes
         .into_iter()
         .fold(("/", filesystem_current), |accum, dir| {
-            if dir.1 >= filesystem_current - (filesystem_max - filesystem_need)
-                && dir.1 < accum.1
-            {
+            if dir.1 >= filesystem_current - (filesystem_max - filesystem_need) && dir.1 < accum.1 {
                 return dir;
             }
             accum

@@ -69,4 +69,3 @@ fn collect_calories(list: Vec<&str>) -> (u32, u32, u32) {
 
     (top_1, top_2, top_3)
 }
-
