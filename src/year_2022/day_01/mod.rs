@@ -1,6 +1,7 @@
 mod inputs;
 
 pub fn run() {
+    let start = std::time::SystemTime::now();
     println!("--------------------------");
     println!("Advent of Code 2022 Day 01");
     println!("--------------------------\n");
@@ -13,10 +14,11 @@ pub fn run() {
     );
     let result_actual = collect_calories(process_input(inputs::ACTUAL));
     println!(
-        "actual: first half: {}, second half: {}",
+        "actual: first half: {}, second half: {}\n",
         result_actual.0,
         result_actual.0 + result_actual.1 + result_actual.2
     );
+    println!("Day 01 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
 fn process_input(raw: &str) -> Vec<&str> {

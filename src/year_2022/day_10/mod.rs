@@ -1,6 +1,7 @@
 mod inputs;
 
 pub fn run() {
+    let start = std::time::SystemTime::now();
     println!("--------------------------");
     println!("Advent of Code 2022 Day 10");
     println!("--------------------------\n");
@@ -10,6 +11,7 @@ pub fn run() {
 
     let result_actual_first = process_input_first(inputs::ACTUAL);
     println!("actual: first half: {:?}\n", result_actual_first);
+    println!("Day 10 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
 #[derive(Debug)]

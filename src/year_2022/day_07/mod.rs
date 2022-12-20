@@ -3,6 +3,7 @@ use std::collections::HashMap;
 mod inputs;
 
 pub fn run() {
+    let start = std::time::SystemTime::now();
     println!("--------------------------");
     println!("Advent of Code 2022 Day 07");
     println!("--------------------------\n");
@@ -20,6 +21,7 @@ pub fn run() {
         "actual: first half: {:?}, second half: {:?}\n",
         result_actual_first, result_actual_second
     );
+    println!("Day 07 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
 #[derive(Debug)]

@@ -1,6 +1,7 @@
 mod inputs;
 
 pub fn run() {
+    let start = std::time::SystemTime::now();
     println!("--------------------------");
     println!("Advent of Code 2022 Day 02");
     println!("--------------------------\n");
@@ -14,10 +15,10 @@ pub fn run() {
     let result_actual_first = calculate_strategy(process_input_first(inputs::ACTUAL));
     let result_actual_second = calculate_strategy(process_input_second(inputs::ACTUAL));
     println!(
-        "actual: first half: {}, second half: {}",
+        "actual: first half: {}, second half: {}\n",
         result_actual_first, result_actual_second
     );
-    println!("");
+    println!("Day 02 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
 enum Move {
