@@ -9,6 +9,7 @@ mod day_08;
 mod day_09;
 mod day_10;
 mod day_11;
+mod day_12;
 
 pub fn run() {
     let start = std::time::SystemTime::now();
@@ -23,5 +24,6 @@ pub fn run() {
     day_09::run();
     day_10::run();
     day_11::run();
+    day_12::run();
     println!("All days completed in: {:?}", start.elapsed().unwrap());
 }
