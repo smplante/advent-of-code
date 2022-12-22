@@ -24,7 +24,7 @@ pub fn run() {
     println!("Day 14 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-fn process_input_first(raw: &str) -> usize {
+fn process_input_first(input: &str) -> usize {
     let window_size = 2;
 
     let mut cave = vec![vec!['.'; 1000]; 200];
@@ -35,7 +35,7 @@ fn process_input_first(raw: &str) -> usize {
     let mut max_x = usize::MIN;
     let mut max_y = usize::MIN;
 
-    raw.split("\n").for_each(|line| {
+    input.split("\n").for_each(|line| {
         line.split(" -> ")
             .map(|coord| {
                 let coord = coord.split_once(",").unwrap();
@@ -113,7 +113,7 @@ fn process_input_first(raw: &str) -> usize {
     }
 }
 
-fn process_input_second(raw: &str) -> usize {
+fn process_input_second(input: &str) -> usize {
     let window_size = 2;
 
     let mut cave = vec![vec!['.'; 1000]; 200];
@@ -124,7 +124,7 @@ fn process_input_second(raw: &str) -> usize {
     let mut max_x = usize::MIN;
     let mut max_y = usize::MIN;
 
-    raw.split("\n").for_each(|line| {
+    input.split("\n").for_each(|line| {
         line.split(" -> ")
             .map(|coord| {
                 let coord = coord.split_once(",").unwrap();

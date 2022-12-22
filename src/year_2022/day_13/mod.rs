@@ -127,8 +127,8 @@ impl Packet {
     }
 }
 
-fn process_input_first(raw: &str) -> usize {
-    let b = raw
+fn process_input_first(input: &str) -> usize {
+    let b = input
         .split("\n\n")
         .into_iter()
         .map(|pairs| {
@@ -148,8 +148,8 @@ fn process_input_first(raw: &str) -> usize {
     })
 }
 
-fn process_input_second(raw: &str) -> usize {
-    let mut packets = raw
+fn process_input_second(input: &str) -> usize {
+    let mut packets = input
         .split("\n\n")
         .into_iter()
         .flat_map(|pairs| {

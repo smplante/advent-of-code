@@ -24,8 +24,8 @@ pub fn run() {
     println!("Day 08 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-fn process_input_first(raw: &str) -> usize {
-    let grid: Vec<Vec<u32>> = raw
+fn process_input_first(input: &str) -> usize {
+    let grid: Vec<Vec<u32>> = input
         .split("\n")
         .map(|s| {
             s.chars()
@@ -109,8 +109,8 @@ fn process_input_first(raw: &str) -> usize {
     visible_trees.len()
 }
 
-fn process_input_second(raw: &str) -> usize {
-    let grid: Vec<Vec<u32>> = raw
+fn process_input_second(input: &str) -> usize {
+    let grid: Vec<Vec<u32>> = input
         .split("\n")
         .map(|s| {
             s.chars()

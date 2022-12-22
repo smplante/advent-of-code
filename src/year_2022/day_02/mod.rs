@@ -51,8 +51,8 @@ fn letter_to_target_move(opponent: &str, target: &str) -> Move {
     }
 }
 
-fn process_input_first(raw: &str) -> Vec<(Move, Move)> {
-    raw.split("\n")
+fn process_input_first(input: &str) -> Vec<(Move, Move)> {
+    input.split("\n")
         .into_iter()
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();
@@ -61,8 +61,8 @@ fn process_input_first(raw: &str) -> Vec<(Move, Move)> {
         .collect()
 }
 
-fn process_input_second(raw: &str) -> Vec<(Move, Move)> {
-    raw.split("\n")
+fn process_input_second(input: &str) -> Vec<(Move, Move)> {
+    input.split("\n")
         .into_iter()
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();

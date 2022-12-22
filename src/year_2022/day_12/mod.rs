@@ -37,11 +37,11 @@ impl Point {
     }
 }
 
-fn process_input_first(raw: &str) -> u16 {
+fn process_input_first(input: &str) -> u16 {
     let mut start = (0, 0);
     let mut end = (0, 0);
 
-    let mut map = raw
+    let mut map = input
         .split("\n")
         .enumerate()
         .map(|(y, row)| {
@@ -98,11 +98,11 @@ fn process_input_first(raw: &str) -> u16 {
     map[end.1][end.0].steps_from_start
 }
 
-fn process_input_second(raw: &str) -> u16 {
+fn process_input_second(input: &str) -> u16 {
     let mut start = (0, 0);
     let mut end = (0, 0);
 
-    let mut map = raw
+    let mut map = input
         .split("\n")
         .enumerate()
         .map(|(y, row)| {

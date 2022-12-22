@@ -51,7 +51,7 @@ where
     }
 }
 
-fn process_input_first(raw: &str) -> u128 {
+fn process_input_first(input: &str) -> u128 {
     
     let mut monkeys = Vec::new();
 
@@ -62,7 +62,7 @@ fn process_input_first(raw: &str) -> u128 {
     let mut on_true = 0;
     let mut on_false = 0;
 
-    for line in raw.split("\n") {
+    for line in input.split("\n") {
         if line == "" {
             monkeys.push(Monkey::new(
                 items, operation, divisor, on_true, on_false,
@@ -164,7 +164,7 @@ fn process_input_first(raw: &str) -> u128 {
     inspections[inspections.len()-1] * inspections[inspections.len()-2]
 }
 
-fn process_input_second(raw: &str) -> u128 {
+fn process_input_second(input: &str) -> u128 {
     
     let mut monkeys = Vec::new();
 
@@ -175,7 +175,7 @@ fn process_input_second(raw: &str) -> u128 {
     let mut on_true = 0;
     let mut on_false = 0;
 
-    for line in raw.split("\n") {
+    for line in input.split("\n") {
         if line == "" {
             monkeys.push(Monkey::new(
                 items, operation, divisor, on_true, on_false,

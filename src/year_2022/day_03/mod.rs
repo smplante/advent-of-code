@@ -60,11 +60,11 @@ fn char_to_priority(c: &char) -> u32 {
     }
 }
 
-fn process_input_second(raw: &str) -> Vec<[HashSet<char>; 3]> {
+fn process_input_second(input: &str) -> Vec<[HashSet<char>; 3]> {
     let mut groups = Vec::new();
     let mut elves: [HashSet<char>; 3] = [HashSet::new(), HashSet::new(), HashSet::new()];
 
-    raw.split("\n")
+    input.split("\n")
         .into_iter()
         .enumerate()
         .for_each(|(pos, rucksack_raw)| {
@@ -79,8 +79,8 @@ fn process_input_second(raw: &str) -> Vec<[HashSet<char>; 3]> {
     groups
 }
 
-fn process_input_first(raw: &str) -> Vec<HashSet<char>> {
-    raw.split("\n")
+fn process_input_first(input: &str) -> Vec<HashSet<char>> {
+    input.split("\n")
         .into_iter()
         .map(|rucksack_raw| {
             let (left, right) = rucksack_raw.split_at(rucksack_raw.len() / 2);

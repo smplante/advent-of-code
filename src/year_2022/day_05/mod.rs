@@ -22,10 +22,10 @@ pub fn run() {
     println!("Day 05 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-fn process_input_first(raw: &str) -> String {
+fn process_input_first(input: &str) -> String {
     let mut stacks = Vec::new();
 
-    let (first_half, second_half) = raw.split_once("\n\n").unwrap();
+    let (first_half, second_half) = input.split_once("\n\n").unwrap();
 
     let first_half = first_half.split("\n").collect::<Vec<&str>>();
     for _ in 0..((first_half[0].len() + 1) / 4) {
@@ -75,10 +75,10 @@ fn process_input_first(raw: &str) -> String {
         })
 }
 
-fn process_input_second(raw: &str) -> String {
+fn process_input_second(input: &str) -> String {
     let mut stacks = Vec::new();
 
-    let (first_half, second_half) = raw.split_once("\n\n").unwrap();
+    let (first_half, second_half) = input.split_once("\n\n").unwrap();
 
     let first_half = first_half.split("\n").collect::<Vec<&str>>();
     for _ in 0..((first_half[0].len() + 1) / 4) {

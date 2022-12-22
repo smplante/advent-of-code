@@ -21,8 +21,8 @@ pub fn run() {
     println!("Day 01 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-fn process_input(raw: &str) -> Vec<&str> {
-    let split = raw.split("\n");
+fn process_input(input: &str) -> Vec<&str> {
+    let split = input.split("\n");
     let output: Vec<&str> = split.collect();
 
     output

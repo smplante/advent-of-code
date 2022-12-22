@@ -106,10 +106,10 @@ impl Rope {
     }
 }
 
-fn process_input_first(raw: &str) -> usize {
+fn process_input_first(input: &str) -> usize {
     let mut rope = Rope::new(2);
 
-    raw.split("\n")
+    input.split("\n")
         .map(|c| {
             let (direction, count) = c.split_once(" ").unwrap();
             match direction {
@@ -127,10 +127,10 @@ fn process_input_first(raw: &str) -> usize {
     rope.tail_visits.len()
 }
 
-fn process_input_second(raw: &str) -> usize {
+fn process_input_second(input: &str) -> usize {
     let mut rope = Rope::new(10);
 
-    raw.split("\n")
+    input.split("\n")
         .map(|c| {
             let (direction, count) = c.split_once(" ").unwrap();
             match direction {

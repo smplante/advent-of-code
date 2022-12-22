@@ -20,8 +20,8 @@ enum Command {
     Addx(i32),
 }
 
-fn process_input_first(raw: &str) -> usize {
-    let (_, _, signal_strength, crt_row) = raw
+fn process_input_first(input: &str) -> usize {
+    let (_, _, signal_strength, crt_row) = input
         .split("\n")
         .map(|line| {
             if line.starts_with("noop") {

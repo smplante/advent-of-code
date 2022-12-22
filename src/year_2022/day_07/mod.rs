@@ -82,14 +82,14 @@ impl FS {
     }
 }
 
-fn process_input_first(raw: &str) -> u32 {
+fn process_input_first(input: &str) -> u32 {
     let mut cur_path: Vec<&str> = Vec::new();
     let mut root_dir = FS::dir("/");
     let mut cur_dir = &mut root_dir;
 
     let mut size_sum = 0;
 
-    for line in raw.split("\n").into_iter() {
+    for line in input.split("\n").into_iter() {
         let mut split_line = line.split_whitespace();
         if line.starts_with("$ ls") {
             continue;
@@ -134,14 +134,14 @@ fn process_input_first(raw: &str) -> u32 {
     size_sum
 }
 
-fn process_input_second(raw: &str) -> u32 {
+fn process_input_second(input: &str) -> u32 {
     let mut cur_path: Vec<&str> = Vec::new();
     let mut root_dir = FS::dir("/");
     let mut cur_dir = &mut root_dir;
 
     let mut dir_sizes = HashMap::new();
 
-    for line in raw.split("\n").into_iter() {
+    for line in input.split("\n").into_iter() {
         let mut split_line = line.split_whitespace();
         if line.starts_with("$ ls") {
             continue;

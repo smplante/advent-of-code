@@ -22,8 +22,8 @@ pub fn run() {
     println!("Day 04 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-fn process_input_first(raw: &str) -> u32 {
-    raw.split("\n")
+fn process_input_first(input: &str) -> u32 {
+    input.split("\n")
         .into_iter()
         .map(|pairs| {
             pairs
@@ -66,8 +66,8 @@ fn process_input_first(raw: &str) -> u32 {
         .sum()
 }
 
-fn process_input_second(raw: &str) -> u32 {
-    raw.split("\n")
+fn process_input_second(input: &str) -> u32 {
+    input.split("\n")
         .into_iter()
         .map(|pairs| {
             pairs
