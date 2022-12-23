@@ -174,3 +174,21 @@ fn process_input_second(input: &str) -> usize {
         product
     })
 }
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input_first(inputs::ACTUAL));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| process_input_second(inputs::ACTUAL));
+    }
+}

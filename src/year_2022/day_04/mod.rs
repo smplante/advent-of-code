@@ -23,7 +23,8 @@ pub fn run() {
 }
 
 fn process_input_first(input: &str) -> u32 {
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .map(|pairs| {
             pairs
@@ -67,7 +68,8 @@ fn process_input_first(input: &str) -> u32 {
 }
 
 fn process_input_second(input: &str) -> u32 {
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .map(|pairs| {
             pairs
@@ -110,4 +112,22 @@ fn process_input_second(input: &str) -> u32 {
                 .expect("inputs should already be sanitized")
         })
         .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input_first(inputs::ACTUAL));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| process_input_second(inputs::ACTUAL));
+    }
 }

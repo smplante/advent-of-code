@@ -109,7 +109,8 @@ impl Rope {
 fn process_input_first(input: &str) -> usize {
     let mut rope = Rope::new(2);
 
-    input.split("\n")
+    input
+        .split("\n")
         .map(|c| {
             let (direction, count) = c.split_once(" ").unwrap();
             match direction {
@@ -130,7 +131,8 @@ fn process_input_first(input: &str) -> usize {
 fn process_input_second(input: &str) -> usize {
     let mut rope = Rope::new(10);
 
-    input.split("\n")
+    input
+        .split("\n")
         .map(|c| {
             let (direction, count) = c.split_once(" ").unwrap();
             match direction {
@@ -146,4 +148,22 @@ fn process_input_second(input: &str) -> usize {
         });
 
     rope.tail_visits.len()
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input_first(inputs::ACTUAL));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| process_input_second(inputs::ACTUAL));
+    }
 }

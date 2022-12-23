@@ -71,3 +71,17 @@ fn collect_calories(list: Vec<&str>) -> (u32, u32, u32) {
 
     (top_1, top_2, top_3)
 }
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input(b: &mut Bencher) {
+        b.iter(|| collect_calories(process_input(inputs::ACTUAL)));
+    }
+
+}

@@ -64,7 +64,8 @@ fn process_input_second(input: &str) -> Vec<[HashSet<char>; 3]> {
     let mut groups = Vec::new();
     let mut elves: [HashSet<char>; 3] = [HashSet::new(), HashSet::new(), HashSet::new()];
 
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .enumerate()
         .for_each(|(pos, rucksack_raw)| {
@@ -80,7 +81,8 @@ fn process_input_second(input: &str) -> Vec<[HashSet<char>; 3]> {
 }
 
 fn process_input_first(input: &str) -> Vec<HashSet<char>> {
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .map(|rucksack_raw| {
             let (left, right) = rucksack_raw.split_at(rucksack_raw.len() / 2);
@@ -93,4 +95,40 @@ fn process_input_first(input: &str) -> Vec<HashSet<char>> {
                 .collect::<HashSet<char>>()
         })
         .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| {
+            process_input_first(inputs::ACTUAL)
+                .iter()
+                .map(|chars| chars.iter().map(char_to_priority).sum::<u32>())
+                .sum::<u32>()
+        });
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| {
+            process_input_second(inputs::ACTUAL)
+                .iter_mut()
+                .map(|elves| {
+                    let mut common = HashSet::new();
+                    for &c in elves[2].iter() {
+                        if elves[0].contains(&c) && elves[1].contains(&c) {
+                            common.insert(c);
+                        }
+                    }
+                    common.iter().map(char_to_priority).sum::<u32>()
+                })
+                .sum::<u32>()
+        });
+    }
 }

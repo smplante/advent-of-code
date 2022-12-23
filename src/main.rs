@@ -1,3 +1,5 @@
+#![feature(test)]
+
 mod year_2022;
 
 fn main() {

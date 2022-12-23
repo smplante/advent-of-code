@@ -8,11 +8,17 @@ pub fn run() {
 
     let result_test_first = process_input_first(inputs::TEST);
     let result_test_second = process_input_second(inputs::TEST);
-    println!("test:     first half: {:?}, second half: {:?}", result_test_first, result_test_second);
+    println!(
+        "test:     first half: {:?}, second half: {:?}",
+        result_test_first, result_test_second
+    );
 
     let result_actual_first = process_input_first(inputs::ACTUAL);
     let result_actual_second = process_input_second(inputs::ACTUAL);
-    println!("actual:   first half: {:?}, second half: {:?}\n", result_actual_first, result_actual_second);
+    println!(
+        "actual:   first half: {:?}, second half: {:?}\n",
+        result_actual_first, result_actual_second
+    );
     println!("Day 11 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
@@ -52,9 +58,7 @@ where
 }
 
 fn process_input_first(input: &str) -> u128 {
-    
     let mut monkeys = Vec::new();
-
 
     let mut items: Vec<u128> = Vec::new();
     let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + u128::from(1u128));
@@ -64,9 +68,7 @@ fn process_input_first(input: &str) -> u128 {
 
     for line in input.split("\n") {
         if line == "" {
-            monkeys.push(Monkey::new(
-                items, operation, divisor, on_true, on_false,
-            ));
+            monkeys.push(Monkey::new(items, operation, divisor, on_true, on_false));
             items = Vec::new();
             operation = Box::new(|old| old + u128::from(1u128));
             continue;
@@ -97,12 +99,14 @@ fn process_input_first(input: &str) -> u128 {
                 ) {
                     (a, "+", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone()) + b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old.clone())
+                                + b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     (a, "*", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone()) * b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old.clone())
+                                * b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     _ => (),
@@ -152,7 +156,7 @@ fn process_input_first(input: &str) -> u128 {
                 } else {
                     monkeys[on_false].items.push(worry_level);
                 }
-    
+
                 monkeys.get_mut(i).unwrap().inspections += 1;
             }
         }
@@ -161,13 +165,11 @@ fn process_input_first(input: &str) -> u128 {
     let mut inspections = monkeys.iter().map(|m| m.inspections).collect::<Vec<u128>>();
     inspections.sort();
 
-    inspections[inspections.len()-1] * inspections[inspections.len()-2]
+    inspections[inspections.len() - 1] * inspections[inspections.len() - 2]
 }
 
 fn process_input_second(input: &str) -> u128 {
-    
     let mut monkeys = Vec::new();
-
 
     let mut items: Vec<u128> = Vec::new();
     let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + u128::from(1u128));
@@ -177,9 +179,7 @@ fn process_input_second(input: &str) -> u128 {
 
     for line in input.split("\n") {
         if line == "" {
-            monkeys.push(Monkey::new(
-                items, operation, divisor, on_true, on_false,
-            ));
+            monkeys.push(Monkey::new(items, operation, divisor, on_true, on_false));
             items = Vec::new();
             operation = Box::new(|old| old + u128::from(1u128));
             continue;
@@ -210,12 +210,14 @@ fn process_input_second(input: &str) -> u128 {
                 ) {
                     (a, "+", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone()) + b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old.clone())
+                                + b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     (a, "*", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone()) * b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old.clone())
+                                * b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     _ => (),
@@ -252,7 +254,6 @@ fn process_input_second(input: &str) -> u128 {
         }
     }
 
-
     let all_divisors = monkeys.iter().map(|m| m.divisor).product::<u128>();
 
     for _ in 0..10000 {
@@ -268,7 +269,7 @@ fn process_input_second(input: &str) -> u128 {
                 } else {
                     monkeys[on_false].items.push(worry_level);
                 }
-    
+
                 monkeys.get_mut(i).unwrap().inspections += 1;
             }
         }
@@ -277,5 +278,23 @@ fn process_input_second(input: &str) -> u128 {
     let mut inspections = monkeys.iter().map(|m| m.inspections).collect::<Vec<u128>>();
     inspections.sort();
 
-    inspections[inspections.len()-1] * inspections[inspections.len()-2]
+    inspections[inspections.len() - 1] * inspections[inspections.len() - 2]
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input_first(inputs::ACTUAL));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| process_input_second(inputs::ACTUAL));
+    }
 }

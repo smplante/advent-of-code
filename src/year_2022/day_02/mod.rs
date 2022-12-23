@@ -52,7 +52,8 @@ fn letter_to_target_move(opponent: &str, target: &str) -> Move {
 }
 
 fn process_input_first(input: &str) -> Vec<(Move, Move)> {
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();
@@ -62,7 +63,8 @@ fn process_input_first(input: &str) -> Vec<(Move, Move)> {
 }
 
 fn process_input_second(input: &str) -> Vec<(Move, Move)> {
-    input.split("\n")
+    input
+        .split("\n")
         .into_iter()
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();
@@ -89,4 +91,22 @@ fn calculate_strategy(matchups: Vec<(Move, Move)>) -> u32 {
             (Move::Scissors(_), Move::Scissors(b)) => b + 3,
         })
         .sum::<u32>()
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| calculate_strategy(process_input_first(inputs::ACTUAL)));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| calculate_strategy(process_input_second(inputs::ACTUAL)));
+    }
 }

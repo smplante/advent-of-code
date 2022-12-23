@@ -79,22 +79,23 @@ fn process_input_first(input: &str) -> u16 {
             }
 
             if map[to_y][to_x].height == map[y][x].height + 1
-            && map[to_y][to_x].steps_from_start > steps_from_start {
+                && map[to_y][to_x].steps_from_start > steps_from_start
+            {
                 map[to_y][to_x].steps_from_start = steps_from_start;
-                walk_points.push((to_x,to_y,steps_from_start));
+                walk_points.push((to_x, to_y, steps_from_start));
                 continue;
             }
 
             if map[to_y][to_x].height <= map[y][x].height
-            && map[to_y][to_x].steps_from_start > steps_from_start {
+                && map[to_y][to_x].steps_from_start > steps_from_start
+            {
                 map[to_y][to_x].steps_from_start = steps_from_start;
-                walk_points.push((to_x,to_y,steps_from_start));
+                walk_points.push((to_x, to_y, steps_from_start));
                 continue;
             }
-
         }
     }
-    
+
     map[end.1][end.0].steps_from_start
 }
 
@@ -140,26 +141,46 @@ fn process_input_second(input: &str) -> u16 {
             }
 
             if map[y][x].height == map[to_y][to_x].height + 1
-            && map[to_y][to_x].steps_from_start > steps_from_start {
+                && map[to_y][to_x].steps_from_start > steps_from_start
+            {
                 if map[to_y][to_x].height == 'a' as u8 {
-                    return steps_from_start
+                    return steps_from_start;
                 }
                 map[to_y][to_x].steps_from_start = steps_from_start;
-                walk_points.push((to_x,to_y,steps_from_start));
+                walk_points.push((to_x, to_y, steps_from_start));
                 continue;
             }
 
             if map[y][x].height <= map[to_y][to_x].height
-            && map[to_y][to_x].steps_from_start > steps_from_start {
+                && map[to_y][to_x].steps_from_start > steps_from_start
+            {
                 if map[to_y][to_x].height == 'a' as u8 {
-                    return steps_from_start
+                    return steps_from_start;
                 }
                 map[to_y][to_x].steps_from_start = steps_from_start;
-                walk_points.push((to_x,to_y,steps_from_start));
+                walk_points.push((to_x, to_y, steps_from_start));
                 continue;
             }
         }
     }
 
     u16::MAX
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input_first(inputs::ACTUAL));
+    }
+
+    #[bench]
+    fn bench_process_input_second(b: &mut Bencher) {
+        b.iter(|| process_input_second(inputs::ACTUAL));
+    }
 }

@@ -6,10 +6,10 @@ pub fn run() {
     println!("Advent of Code 2022 Day 10");
     println!("--------------------------\n");
 
-    let result_test_first = process_input_first(inputs::TEST);
+    let result_test_first = process_input(inputs::TEST);
     println!("test:   first half: {:?}", result_test_first);
 
-    let result_actual_first = process_input_first(inputs::ACTUAL);
+    let result_actual_first = process_input(inputs::ACTUAL);
     println!("actual: first half: {:?}\n", result_actual_first);
     println!("Day 10 completed in: {:?}\n", start.elapsed().unwrap());
 }
@@ -20,7 +20,7 @@ enum Command {
     Addx(i32),
 }
 
-fn process_input_first(input: &str) -> usize {
+fn process_input(input: &str) -> usize {
     let (_, _, signal_strength, crt_row) = input
         .split("\n")
         .map(|line| {
@@ -90,4 +90,17 @@ fn process_input_first(input: &str) -> usize {
     println!();
 
     signal_strength
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate test;
+
+    use super::*;
+    use test::Bencher;
+
+    #[bench]
+    fn bench_process_input_first(b: &mut Bencher) {
+        b.iter(|| process_input(inputs::ACTUAL));
+    }
 }
