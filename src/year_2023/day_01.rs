@@ -1,7 +1,7 @@
 use crate::year_2023::Data;
 use rayon::prelude::*;
 
-pub fn run(){
+pub fn run() {
     println!("--------------------------");
     println!("Advent of Code 2023 Day 01");
     println!("--------------------------\n");
@@ -32,16 +32,16 @@ pub fn run(){
     println!("Day 01 completed in: {:?}\n", start.elapsed().unwrap());
 }
 
-const NUMS: [(&[u8], &str); 9] = [
-    ("one".as_bytes(), "1"),
-    ("two".as_bytes(), "2"),
-    ("three".as_bytes(), "3"),
-    ("four".as_bytes(), "4"),
-    ("five".as_bytes(), "5"),
-    ("six".as_bytes(), "6"),
-    ("seven".as_bytes(), "7"),
-    ("eight".as_bytes(), "8"),
-    ("nine".as_bytes(), "9"),
+const NUMS: [(&[u8], u8); 9] = [
+    (b"one", b'1'),
+    (b"two", b'2'),
+    (b"three", b'3'),
+    (b"four", b'4'),
+    (b"five", b'5'),
+    (b"six", b'6'),
+    (b"seven", b'7'),
+    (b"eight", b'8'),
+    (b"nine", b'9'),
 ];
 
 pub fn part_1_rayon(input: &str) -> u32 {
@@ -49,7 +49,7 @@ pub fn part_1_rayon(input: &str) -> u32 {
         .lines()
         .par_bridge()
         .filter(|l| !l.is_empty())
-        .map(|l| parse_line_1(l))
+        .map(parse_line_1)
         .sum()
 }
 
@@ -66,12 +66,30 @@ pub fn part_1(input: &str) -> u32 {
     sum
 }
 
+fn parse_line_1(line: &str) -> u32 {
+    let mut n: Vec<u8> = Vec::new();
+    let line_bytes = line.as_bytes();
+
+    let mut idx = 0;
+    while idx < line_bytes.len() {
+        if line_bytes[idx].is_ascii_digit() {
+            n.push(line_bytes[idx]);
+        }
+
+        idx += 1;
+    }
+
+    // we need to convert ascii digit bytes to their actual numeric value
+    // which is why we subtract 48 from the first and last found digits
+    (10 * (n[0] - 48) + (n[n.len() - 1] - 48)) as u32
+}
+
 pub fn part_2_rayon(input: &str) -> u32 {
     input
         .lines()
         .par_bridge()
         .filter(|l| !l.is_empty())
-        .map(|l| parse_line_2(l))
+        .map(parse_line_2)
         .sum()
 }
 
@@ -88,48 +106,32 @@ pub fn part_2(input: &str) -> u32 {
     sum
 }
 
-fn parse_line_1(line: &str) -> u32 {
-    let mut n: Vec<&str> = Vec::new();
-    let mut idx = 0;
-    let line_bytes = line.as_bytes();
-
-    while idx < line_bytes.len() {
-        if line_bytes[idx].is_ascii_digit() {
-            n.push(std::str::from_utf8(&line_bytes[idx..(idx + 1)]).expect("a digit"));
-        }
-
-        idx += 1;
-    }
-
-    format!("{}{}", n.first().unwrap(), n.last().unwrap())
-        .parse::<u32>()
-        .expect("to be a number")
-}
-
 fn parse_line_2(line: &str) -> u32 {
-    let mut n: Vec<&str> = Vec::new();
-    let mut idx = 0;
+    let mut n: Vec<u8> = Vec::new();
     let line_bytes = line.as_bytes();
 
+    let mut idx = 0;
     'outer: while idx < line_bytes.len() {
         let rest = &line_bytes[idx..];
 
         for (word, value) in NUMS {
             if rest.starts_with(word) {
                 n.push(value);
+                // words can overlap, and we don't want to skip the overlapped word
+                // e.g. oneightwo should parse as 1 8 2, not 1 2
                 idx += word.len() - 1;
                 continue 'outer;
             }
         }
 
         if rest[0].is_ascii_digit() {
-            n.push(std::str::from_utf8(&rest[..1]).expect("a digit"));
+            n.push(rest[0]);
         }
 
         idx += 1;
     }
 
-    format!("{}{}", n.first().unwrap(), n.last().unwrap())
-        .parse::<u32>()
-        .expect("to be a number")
+    // we need to convert ascii digit bytes to their actual numeric value
+    // which is why we subtract 48 from the first and last found digits
+    (10 * (n[0] - 48) + (n[n.len() - 1] - 48)) as u32
 }
