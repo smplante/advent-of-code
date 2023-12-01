@@ -31,5 +31,5 @@ pub fn run() {
     day_13::run();
     day_14::run();
     day_15::run();
-    println!("All days completed in: {:?}", start.elapsed().unwrap());
+    println!("All days completed in: {:?}\n\n", start.elapsed().unwrap());
 }

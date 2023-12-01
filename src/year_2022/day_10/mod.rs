@@ -92,15 +92,15 @@ fn process_input(input: &str) -> usize {
     signal_strength
 }
 
-#[cfg(test)]
-mod tests {
-    extern crate test;
-
-    use super::*;
-    use test::Bencher;
-
-    #[bench]
-    fn bench_process_input_first(b: &mut Bencher) {
-        b.iter(|| process_input(inputs::ACTUAL));
-    }
-}
+// #[cfg(test)]
+// mod tests {
+//     extern crate test;
+//
+//     use super::*;
+//     use test::Bencher;
+//
+//     #[bench]
+//     fn bench_process_input_first(b: &mut Bencher) {
+//         b.iter(|| process_input(inputs::ACTUAL));
+//     }
+// }

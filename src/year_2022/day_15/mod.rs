@@ -186,20 +186,20 @@ fn calculate_overlap((x, y, r): &(i64, i64, i64), row: i64, target: i64) -> (i64
     (start, end)
 }
 
-#[cfg(test)]
-mod tests {
-    extern crate test;
-
-    use super::*;
-    use test::Bencher;
-
-    #[bench]
-    fn bench_process_input_first(b: &mut Bencher) {
-        b.iter(|| process_input_first(2000000, inputs::ACTUAL));
-    }
-
-    #[bench]
-    fn bench_process_input_second(b: &mut Bencher) {
-        b.iter(|| process_input_second(4000000, inputs::ACTUAL));
-    }
-}
+// #[cfg(test)]
+// mod tests {
+//     extern crate test;
+//
+//     use super::*;
+//     use test::Bencher;
+//
+//     #[bench]
+//     fn bench_process_input_first(b: &mut Bencher) {
+//         b.iter(|| process_input_first(2000000, inputs::ACTUAL));
+//     }
+//
+//     #[bench]
+//     fn bench_process_input_second(b: &mut Bencher) {
+//         b.iter(|| process_input_second(4000000, inputs::ACTUAL));
+//     }
+// }
