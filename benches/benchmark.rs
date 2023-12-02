@@ -24,6 +24,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     group.bench_function("day_01_p2", |b| {
         b.iter(|| aoc_lib::year_2023::day_01::part_2(black_box(data)))
     });
+    group.bench_function("day_01", |b| b.iter(|| aoc_lib::year_2023::day_01::run()));
 }
 
 criterion_group!(benches, criterion_benchmark);

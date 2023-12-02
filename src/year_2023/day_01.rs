@@ -95,16 +95,16 @@ fn parse_line_2(line: &str) -> u32 {
     'outer: while idx < line_bytes.len() {
         let rest = &line_bytes[idx..];
 
+        if rest[0].is_ascii_digit() {
+            n += 10 * (rest[0] - b'0');
+            break 'outer;
+        }
+
         for (word, value) in NUMS {
             if rest.starts_with(word) {
                 n += 10 * (value - b'0');
                 break 'outer;
             }
-        }
-
-        if rest[0].is_ascii_digit() {
-            n += 10 * (rest[0] - b'0');
-            break 'outer;
         }
 
         idx += 1;
@@ -114,16 +114,16 @@ fn parse_line_2(line: &str) -> u32 {
     'outer: loop {
         let rest = &line_bytes[..(idx + 1)];
 
+        if rest[idx].is_ascii_digit() {
+            n += rest[idx] - b'0';
+            break 'outer;
+        }
+
         for (word, value) in NUMS {
             if rest.ends_with(word) {
                 n += value - b'0';
                 break 'outer;
             }
-        }
-
-        if rest[idx].is_ascii_digit() {
-            n += rest[idx] - b'0';
-            break 'outer;
         }
 
         idx -= 1;
