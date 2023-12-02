@@ -74,14 +74,25 @@ fn parse_line_1(line: &str) -> u32 {
     while idx < line_bytes.len() {
         if line_bytes[idx].is_ascii_digit() {
             n.push(line_bytes[idx]);
+            break;
         }
 
         idx += 1;
     }
 
+    idx = line_bytes.len() - 1;
+    loop {
+        if line_bytes[idx].is_ascii_digit() {
+            n.push(line_bytes[idx]);
+            break;
+        }
+
+        idx -= 1;
+    }
+
     // we need to convert ascii digit bytes to their actual numeric value
-    // which is why we subtract 48 from the first and last found digits
-    (10 * (n[0] - 48) + (n[n.len() - 1] - 48)) as u32
+    // which is why we subtract the bytes of 0 from the first and last found digits
+    (10 * (n[0] - b'0') + (n[1] - b'0')) as u32
 }
 
 pub fn part_2_rayon(input: &str) -> u32 {
@@ -117,21 +128,38 @@ fn parse_line_2(line: &str) -> u32 {
         for (word, value) in NUMS {
             if rest.starts_with(word) {
                 n.push(value);
-                // words can overlap, and we don't want to skip the overlapped word
-                // e.g. oneightwo should parse as 1 8 2, not 1 2
-                idx += word.len() - 1;
-                continue 'outer;
+                break 'outer;
             }
         }
 
         if rest[0].is_ascii_digit() {
             n.push(rest[0]);
+            break 'outer;
         }
 
         idx += 1;
     }
 
+    idx = line_bytes.len() - 1;
+    'outer: loop {
+        let rest = &line_bytes[..(idx + 1)];
+
+        for (word, value) in NUMS {
+            if rest.ends_with(word) {
+                n.push(value);
+                break 'outer;
+            }
+        }
+
+        if rest[idx].is_ascii_digit() {
+            n.push(rest[idx]);
+            break 'outer;
+        }
+
+        idx -= 1;
+    }
+
     // we need to convert ascii digit bytes to their actual numeric value
-    // which is why we subtract 48 from the first and last found digits
-    (10 * (n[0] - 48) + (n[n.len() - 1] - 48)) as u32
+    // which is why we subtract the bytes of 0 from the first and last found digits
+    (10 * (n[0] - b'0') + (n[1] - b'0')) as u32
 }
