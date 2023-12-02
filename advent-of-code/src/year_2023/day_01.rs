@@ -1,36 +1,6 @@
-use crate::year_2023::Data;
 use rayon::prelude::*;
 
-pub fn run() {
-    println!("--------------------------");
-    println!("Advent of Code 2023 Day 01");
-    println!("--------------------------\n");
-
-    let sample_01_data_cow = Data::get("day_01_sample_1").expect("file to exist").data;
-    let sample_01_data = std::str::from_utf8(&sample_01_data_cow).expect("to be a string");
-
-    let sample_02_data_cow = Data::get("day_01_sample_2").expect("file to exist").data;
-    let sample_02_data = std::str::from_utf8(&sample_02_data_cow).expect("to be a string");
-
-    let part_01_data_cow = Data::get("day_01_part_1").expect("file to exist").data;
-    let part_01_data = std::str::from_utf8(&part_01_data_cow).expect("to be a string");
-
-    let part_02_data_cow = Data::get("day_01_part_1").expect("file to exist").data;
-    let part_02_data = std::str::from_utf8(&part_02_data_cow).expect("to be a string");
-
-    let start = std::time::SystemTime::now();
-    println!(
-        "sample:  first half: {}, second half: {}",
-        part_1(sample_01_data),
-        part_2(sample_02_data)
-    );
-    println!(
-        "actual: first half: {}, second half: {}\n",
-        part_1(part_01_data),
-        part_2(part_02_data)
-    );
-    println!("Day 01 completed in: {:?}\n", start.elapsed().unwrap());
-}
+aoc_pm::make_run!(2023_01);
 
 const NUMS: [(&[u8], u8); 9] = [
     (b"one", b'1'),

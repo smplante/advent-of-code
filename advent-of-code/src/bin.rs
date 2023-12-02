@@ -12,7 +12,8 @@ fn initialize_rayon() {
 
     rayon::ThreadPoolBuilder::new()
         .num_threads(num_threads)
-        .build_global().unwrap();
+        .build_global()
+        .unwrap();
 }
 
 fn main() {

@@ -10,19 +10,18 @@ fn criterion_benchmark(c: &mut Criterion) {
         .build_global()
         .unwrap();
 
-    let d = aoc_lib::year_2023::Data::get("day_01_part_1")
-        .expect("file to exist")
-        .data;
-    let data = std::str::from_utf8(&d).expect("to be a string");
-
     let mut group = c.benchmark_group("2023");
     group.sample_size(500).warm_up_time(Duration::from_secs(5));
 
+    let d1 = aoc_lib::year_2023::Data::get("day_01_part_1")
+        .expect("file to exist")
+        .data;
+    let data1 = std::str::from_utf8(&d1).expect("to be a string");
     group.bench_function("day_01_p1", |b| {
-        b.iter(|| aoc_lib::year_2023::day_01::part_1(black_box(data)))
+        b.iter(|| aoc_lib::year_2023::day_01::part_1(black_box(data1)))
     });
     group.bench_function("day_01_p2", |b| {
-        b.iter(|| aoc_lib::year_2023::day_01::part_2(black_box(data)))
+        b.iter(|| aoc_lib::year_2023::day_01::part_2(black_box(data1)))
     });
     group.bench_function("day_01", |b| b.iter(|| aoc_lib::year_2023::day_01::run()));
 }
