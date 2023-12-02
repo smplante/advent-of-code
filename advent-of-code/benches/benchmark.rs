@@ -24,6 +24,18 @@ fn criterion_benchmark(c: &mut Criterion) {
         b.iter(|| aoc_lib::year_2023::day_01::part_2(black_box(data1)))
     });
     group.bench_function("day_01", |b| b.iter(|| aoc_lib::year_2023::day_01::run()));
+
+    let d2 = aoc_lib::year_2023::Data::get("day_02_part_1")
+        .expect("file to exist")
+        .data;
+    let data2 = std::str::from_utf8(&d2).expect("to be a string");
+    group.bench_function("day_02_p1", |b| {
+        b.iter(|| aoc_lib::year_2023::day_02::part_1(black_box(data2)))
+    });
+    group.bench_function("day_02_p2", |b| {
+        b.iter(|| aoc_lib::year_2023::day_02::part_2(black_box(data2)))
+    });
+    group.bench_function("day_02", |b| b.iter(|| aoc_lib::year_2023::day_02::run()));
 }
 
 criterion_group!(benches, criterion_benchmark);

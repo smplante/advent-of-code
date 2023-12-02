@@ -41,9 +41,9 @@ pub fn make_run(problem_day: TokenStream) -> TokenStream {
 use crate::year_YEAR_PLACEHOLDER::Data;
 
 pub fn run() {
-    println!("--------------------------");
-    println!("Advent of Code YEAR_PLACEHOLDER Day DAY_PLACEHOLDER");
-    println!("--------------------------\n");
+    eprintln!("--------------------------");
+    eprintln!("Advent of Code YEAR_PLACEHOLDER Day DAY_PLACEHOLDER");
+    eprintln!("--------------------------\n");
 
     let sample_01_data_cow = Data::get("day_DAY_PLACEHOLDER_sample_1").expect("src/year_YEAR_PLACEHOLDER/day_DAY_PLACEHOLDER_sample_1 does not exist").data;
     let sample_01_data = std::str::from_utf8(&sample_01_data_cow).expect("sample_01_data_cow must be a string");
@@ -58,17 +58,17 @@ pub fn run() {
     let part_02_data = std::str::from_utf8(&part_02_data_cow).expect("part_02_data_cow must be a string");
 
     let start = std::time::SystemTime::now();
-    println!(
+    eprintln!(
         "sample:  first half: {}, second half: {}",
         part_1(sample_01_data),
         part_2(sample_02_data)
     );
-    println!(
+    eprintln!(
         "actual: first half: {}, second half: {}\n",
         part_1(part_01_data),
         part_2(part_02_data)
     );
-    println!("Day DAY_PLACEHOLDER completed in: {:?}\n", start.elapsed().unwrap());
+    eprintln!("Day DAY_PLACEHOLDER completed in: {:?}\n", start.elapsed().unwrap());
 }
 "##.replace("YEAR_PLACEHOLDER", year).replace("DAY_PLACEHOLDER", day).parse().unwrap()
 }
