@@ -45,25 +45,11 @@ const NUMS: [(&[u8], u8); 9] = [
 ];
 
 pub fn part_1_rayon(input: &str) -> u32 {
-    input
-        .lines()
-        .par_bridge()
-        .filter(|l| !l.is_empty())
-        .map(parse_line_1)
-        .sum()
+    input.lines().par_bridge().map(parse_line_1).sum()
 }
 
 pub fn part_1(input: &str) -> u32 {
-    let lines = input
-        .lines()
-        .filter(|l| !l.is_empty())
-        .collect::<Vec<&str>>();
-    let mut sum = 0;
-    for line in lines {
-        sum += parse_line_1(line);
-    }
-
-    sum
+    input.lines().map(parse_line_1).sum()
 }
 
 fn parse_line_1(line: &str) -> u32 {
@@ -94,25 +80,11 @@ fn parse_line_1(line: &str) -> u32 {
 }
 
 pub fn part_2_rayon(input: &str) -> u32 {
-    input
-        .lines()
-        .par_bridge()
-        .filter(|l| !l.is_empty())
-        .map(parse_line_2)
-        .sum()
+    input.lines().par_bridge().map(parse_line_2).sum()
 }
 
 pub fn part_2(input: &str) -> u32 {
-    let lines = input
-        .lines()
-        .filter(|l| !l.is_empty())
-        .collect::<Vec<&str>>();
-    let mut sum = 0;
-    for line in lines {
-        sum += parse_line_2(line);
-    }
-
-    sum
+    input.lines().map(parse_line_2).sum()
 }
 
 fn parse_line_2(line: &str) -> u32 {
