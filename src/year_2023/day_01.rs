@@ -67,13 +67,13 @@ pub fn part_1(input: &str) -> u32 {
 }
 
 fn parse_line_1(line: &str) -> u32 {
-    let mut n: Vec<u8> = Vec::new();
     let line_bytes = line.as_bytes();
+    let mut n = 0;
 
     let mut idx = 0;
     while idx < line_bytes.len() {
         if line_bytes[idx].is_ascii_digit() {
-            n.push(line_bytes[idx]);
+            n += 10 * (line_bytes[idx] - b'0');
             break;
         }
 
@@ -83,16 +83,14 @@ fn parse_line_1(line: &str) -> u32 {
     idx = line_bytes.len() - 1;
     loop {
         if line_bytes[idx].is_ascii_digit() {
-            n.push(line_bytes[idx]);
+            n += line_bytes[idx] - b'0';
             break;
         }
 
         idx -= 1;
     }
 
-    // we need to convert ascii digit bytes to their actual numeric value
-    // which is why we subtract the bytes of 0 from the first and last found digits
-    (10 * (n[0] - b'0') + (n[1] - b'0')) as u32
+    n as u32
 }
 
 pub fn part_2_rayon(input: &str) -> u32 {
@@ -118,8 +116,8 @@ pub fn part_2(input: &str) -> u32 {
 }
 
 fn parse_line_2(line: &str) -> u32 {
-    let mut n: Vec<u8> = Vec::new();
     let line_bytes = line.as_bytes();
+    let mut n = 0;
 
     let mut idx = 0;
     'outer: while idx < line_bytes.len() {
@@ -127,13 +125,13 @@ fn parse_line_2(line: &str) -> u32 {
 
         for (word, value) in NUMS {
             if rest.starts_with(word) {
-                n.push(value);
+                n += 10 * (value - b'0');
                 break 'outer;
             }
         }
 
         if rest[0].is_ascii_digit() {
-            n.push(rest[0]);
+            n += 10 * (rest[0] - b'0');
             break 'outer;
         }
 
@@ -146,20 +144,18 @@ fn parse_line_2(line: &str) -> u32 {
 
         for (word, value) in NUMS {
             if rest.ends_with(word) {
-                n.push(value);
+                n += value - b'0';
                 break 'outer;
             }
         }
 
         if rest[idx].is_ascii_digit() {
-            n.push(rest[idx]);
+            n += rest[idx] - b'0';
             break 'outer;
         }
 
         idx -= 1;
     }
 
-    // we need to convert ascii digit bytes to their actual numeric value
-    // which is why we subtract the bytes of 0 from the first and last found digits
-    (10 * (n[0] - b'0') + (n[1] - b'0')) as u32
+    n as u32
 }
