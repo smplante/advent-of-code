@@ -36,7 +36,6 @@ pub fn make_run(problem_day: TokenStream) -> TokenStream {
     };
     let year = f.split('_').next().expect("input should be YYYY_DD format");
     let day = f.split('_').last().expect("input should be YYYY_DD format");
-    eprintln!("inside proc macro make_answer, f is {f}, day is {day}");
     r##"
 use crate::year_YEAR_PLACEHOLDER::Data;
 
