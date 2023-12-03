@@ -61,42 +61,34 @@ fn parse_line_2(line: &str) -> u32 {
     let line_bytes = line.as_bytes();
     let mut n = 0;
 
-    let mut idx = 0;
-    'outer: while idx < line_bytes.len() {
-        let rest = &line_bytes[idx..];
-
-        if rest[0].is_ascii_digit() {
-            n += 10 * (rest[0] - b'0');
+    'outer: for idx in 0..line_bytes.len() {
+        if line_bytes[idx].is_ascii_digit() {
+            n += 10 * (line_bytes[idx] - b'0');
             break 'outer;
         }
 
+        let rest = &line_bytes[idx..];
         for (word, value) in NUMS {
             if rest.starts_with(word) {
                 n += 10 * (value - b'0');
                 break 'outer;
             }
         }
-
-        idx += 1;
     }
 
-    idx = line_bytes.len() - 1;
-    'outer: loop {
-        let rest = &line_bytes[..(idx + 1)];
-
-        if rest[idx].is_ascii_digit() {
-            n += rest[idx] - b'0';
+    'outer: for idx in (0..line_bytes.len()).rev() {
+        if line_bytes[idx].is_ascii_digit() {
+            n += line_bytes[idx] - b'0';
             break 'outer;
         }
 
+        let rest = &line_bytes[..=idx];
         for (word, value) in NUMS {
             if rest.ends_with(word) {
                 n += value - b'0';
                 break 'outer;
             }
         }
-
-        idx -= 1;
     }
 
     n as u32
