@@ -2,6 +2,7 @@ use rust_embed::RustEmbed;
 
 pub mod day_01;
 pub mod day_02;
+pub mod day_03;
 
 #[derive(RustEmbed)]
 #[folder = "src/year_2023/data"]
