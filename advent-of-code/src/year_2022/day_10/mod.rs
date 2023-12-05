@@ -22,12 +22,12 @@ enum Command {
 
 fn process_input(input: &str) -> usize {
     let (_, _, signal_strength, crt_row) = input
-        .split("\n")
+        .split('\n')
         .map(|line| {
             if line.starts_with("noop") {
                 Command::Noop
             } else {
-                Command::Addx(line.split_once(" ").unwrap().1.parse::<i32>().unwrap())
+                Command::Addx(line.split_once(' ').unwrap().1.parse::<i32>().unwrap())
             }
         })
         .fold(

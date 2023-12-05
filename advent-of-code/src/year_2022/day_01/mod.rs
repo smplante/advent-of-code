@@ -22,7 +22,7 @@ pub fn run() {
 }
 
 fn process_input(input: &str) -> Vec<&str> {
-    let split = input.split("\n");
+    let split = input.split('\n');
     let output: Vec<&str> = split.collect();
 
     output
@@ -36,7 +36,7 @@ fn collect_calories(list: Vec<&str>) -> (u32, u32, u32) {
     let mut top_3 = 0;
 
     for &raw_calories in list.iter() {
-        if raw_calories == "" {
+        if raw_calories.is_empty() {
             if elves[elf] >= top_1 {
                 top_3 = top_2;
                 top_2 = top_1;

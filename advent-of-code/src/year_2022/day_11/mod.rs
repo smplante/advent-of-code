@@ -61,37 +61,31 @@ fn process_input_first(input: &str) -> u128 {
     let mut monkeys = Vec::new();
 
     let mut items: Vec<u128> = Vec::new();
-    let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + u128::from(1u128));
+    let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + 1u128);
     let mut divisor: u128 = 0;
     let mut on_true = 0;
     let mut on_false = 0;
 
-    for line in input.split("\n") {
-        if line == "" {
+    for line in input.split('\n') {
+        if line.is_empty() {
             monkeys.push(Monkey::new(items, operation, divisor, on_true, on_false));
             items = Vec::new();
-            operation = Box::new(|old| old + u128::from(1u128));
+            operation = Box::new(|old| old + 1u128);
             continue;
         }
-        match line.trim().split_once(":").unwrap() {
+        match line.trim().split_once(':').unwrap() {
             (a, _) if a.starts_with("Monkey") => (),
             (a, b) if a.starts_with("Starting") => {
                 items = b
                     .trim()
-                    .split(",")
+                    .split(',')
                     .map(str::trim)
                     .map(str::parse::<u128>)
                     .map(Result::unwrap)
                     .collect::<Vec<u128>>();
             }
             (a, b) if a.starts_with("Operation") => {
-                let mut equation_parts = b
-                    .split_once("=")
-                    .unwrap()
-                    .1
-                    .trim()
-                    .splitn(3, " ")
-                    .into_iter();
+                let mut equation_parts = b.split_once('=').unwrap().1.trim().splitn(3, ' ');
                 match (
                     equation_parts.next().unwrap(),
                     equation_parts.next().unwrap(),
@@ -99,14 +93,12 @@ fn process_input_first(input: &str) -> u128 {
                 ) {
                     (a, "+", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone())
-                                + b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old) + b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     (a, "*", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone())
-                                * b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old) * b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     _ => (),
@@ -114,7 +106,6 @@ fn process_input_first(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("Test") => {
                 divisor = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -123,7 +114,6 @@ fn process_input_first(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("If true") => {
                 on_true = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -132,7 +122,6 @@ fn process_input_first(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("If false") => {
                 on_false = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -147,11 +136,11 @@ fn process_input_first(input: &str) -> u128 {
         for i in 0..monkeys.len() {
             let on_true = monkeys[i].on_true.to_owned();
             let on_false = monkeys[i].on_false.to_owned();
-            while monkeys.get(i).unwrap().items.len() > 0 {
+            while !monkeys.get(i).unwrap().items.is_empty() {
                 let item = monkeys.get_mut(i).unwrap().items.remove(0);
                 let mut worry_level = (monkeys[i].operation)(item);
-                worry_level = worry_level / 3;
-                if worry_level.clone() % monkeys[i].divisor == u128::from(0u128) {
+                worry_level /= 3;
+                if worry_level % monkeys[i].divisor == 0u128 {
                     monkeys[on_true].items.push(worry_level);
                 } else {
                     monkeys[on_false].items.push(worry_level);
@@ -172,37 +161,31 @@ fn process_input_second(input: &str) -> u128 {
     let mut monkeys = Vec::new();
 
     let mut items: Vec<u128> = Vec::new();
-    let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + u128::from(1u128));
+    let mut operation: Box<dyn Fn(u128) -> u128> = Box::new(|old| old + 1u128);
     let mut divisor: u128 = 0;
     let mut on_true = 0;
     let mut on_false = 0;
 
-    for line in input.split("\n") {
-        if line == "" {
+    for line in input.split('\n') {
+        if line.is_empty() {
             monkeys.push(Monkey::new(items, operation, divisor, on_true, on_false));
             items = Vec::new();
-            operation = Box::new(|old| old + u128::from(1u128));
+            operation = Box::new(|old| old + 1u128);
             continue;
         }
-        match line.trim().split_once(":").unwrap() {
+        match line.trim().split_once(':').unwrap() {
             (a, _) if a.starts_with("Monkey") => (),
             (a, b) if a.starts_with("Starting") => {
                 items = b
                     .trim()
-                    .split(",")
+                    .split(',')
                     .map(str::trim)
                     .map(str::parse::<u128>)
                     .map(Result::unwrap)
                     .collect::<Vec<u128>>();
             }
             (a, b) if a.starts_with("Operation") => {
-                let mut equation_parts = b
-                    .split_once("=")
-                    .unwrap()
-                    .1
-                    .trim()
-                    .splitn(3, " ")
-                    .into_iter();
+                let mut equation_parts = b.split_once('=').unwrap().1.trim().splitn(3, ' ');
                 match (
                     equation_parts.next().unwrap(),
                     equation_parts.next().unwrap(),
@@ -210,14 +193,12 @@ fn process_input_second(input: &str) -> u128 {
                 ) {
                     (a, "+", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone())
-                                + b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old) + b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     (a, "*", b) => {
                         operation = Box::new(|old| {
-                            a.parse::<u128>().unwrap_or(old.clone())
-                                * b.parse::<u128>().unwrap_or(old)
+                            a.parse::<u128>().unwrap_or(old) * b.parse::<u128>().unwrap_or(old)
                         });
                     }
                     _ => (),
@@ -225,7 +206,6 @@ fn process_input_second(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("Test") => {
                 divisor = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -234,7 +214,6 @@ fn process_input_second(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("If true") => {
                 on_true = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -243,7 +222,6 @@ fn process_input_second(input: &str) -> u128 {
             }
             (a, b) if a.starts_with("If false") => {
                 on_false = b
-                    .trim()
                     .split_whitespace()
                     .last()
                     .unwrap()
@@ -260,11 +238,11 @@ fn process_input_second(input: &str) -> u128 {
         for i in 0..monkeys.len() {
             let on_true = monkeys[i].on_true.to_owned();
             let on_false = monkeys[i].on_false.to_owned();
-            while monkeys.get(i).unwrap().items.len() > 0 {
+            while !monkeys.get(i).unwrap().items.is_empty() {
                 let item = monkeys.get_mut(i).unwrap().items.remove(0);
                 let mut worry_level = (monkeys[i].operation)(item);
-                worry_level = worry_level % u128::from(all_divisors);
-                if worry_level.clone() % monkeys[i].divisor == u128::from(0u128) {
+                worry_level %= all_divisors;
+                if worry_level % monkeys[i].divisor == 0u128 {
                     monkeys[on_true].items.push(worry_level);
                 } else {
                     monkeys[on_false].items.push(worry_level);

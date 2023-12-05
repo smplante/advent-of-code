@@ -29,7 +29,7 @@ pub fn run(ts: TokenStream) -> TokenStream {
     let answer_1_sample = inputs.next().unwrap();
     let answer_2_sample = inputs.next().unwrap();
 
-    r##"
+    r#"
 use crate::year_{YEAR}::Data;
 
 pub fn run() {
@@ -105,7 +105,7 @@ mod generated_tests {
     }
 }
 
-"##.replace("{YEAR}", &year)
+"#.replace("{YEAR}", &year)
         .replace("{DAY}", &day)
         .replace("{ANSWER_1_SAMPLE}", &answer_1_sample)
         .replace("{ANSWER_2_SAMPLE}", &answer_2_sample)
@@ -123,7 +123,7 @@ pub fn benchmark(ts: TokenStream) -> TokenStream {
     let group = inputs.next().unwrap();
     let year = inputs.next().unwrap();
     let day = inputs.next().unwrap();
-    r##"
+    r#"
 let d = aoc_lib::year_{YEAR}::Data::get("day_{DAY}_part_1")
     .expect("file to exist")
     .data;
@@ -135,7 +135,7 @@ let data = std::str::from_utf8(&d).expect("to be a string");
     b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::part_2(criterion::black_box(data)))
 });
 {GROUP}.bench_function("Day {DAY}", |b| b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::run_no_print()));
-"##
+"#
     .replace("{GROUP}", &group)
     .replace("{YEAR}", &year)
     .replace("{DAY}", &day)

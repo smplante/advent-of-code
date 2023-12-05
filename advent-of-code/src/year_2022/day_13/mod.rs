@@ -35,12 +35,12 @@ impl fmt::Display for Packet {
         match self {
             Packet::Number(n) => write!(f, "{}", n),
             Packet::Array(a) => {
-                if a.len() == 0 {
+                if a.is_empty() {
                     return write!(f, "[]");
                 }
-                write!(f, "{}", '[').unwrap();
-                for i in 0..(a.len() - 1) {
-                    write!(f, "{},", a[i]).unwrap();
+                write!(f, "[").unwrap();
+                for i in a.iter() {
+                    write!(f, "{},", i).unwrap();
                 }
                 write!(f, "{}]", a[a.len() - 1]).unwrap();
                 Ok(())
@@ -56,7 +56,7 @@ impl Packet {
 
         let mut it = input.chars().peekable();
 
-        while it.peek() != None {
+        while it.peek().is_some() {
             let c = it.next().unwrap();
             match c {
                 '[' => {
@@ -71,7 +71,7 @@ impl Packet {
                 ',' => (),
                 '\n' => (),
                 n => {
-                    if it.peek() == None
+                    if it.peek().is_none()
                         || it.peek().unwrap() == &','
                         || it.peek().unwrap() == &'['
                         || it.peek().unwrap() == &']'
@@ -130,9 +130,8 @@ impl Packet {
 fn process_input_first(input: &str) -> usize {
     let b = input
         .split("\n\n")
-        .into_iter()
         .map(|pairs| {
-            let (left, right) = pairs.split_once("\n").unwrap();
+            let (left, right) = pairs.split_once('\n').unwrap();
             let left = Packet::parse(left);
             let right = Packet::parse(right);
 
@@ -151,9 +150,8 @@ fn process_input_first(input: &str) -> usize {
 fn process_input_second(input: &str) -> usize {
     let mut packets = input
         .split("\n\n")
-        .into_iter()
         .flat_map(|pairs| {
-            let (left, right) = pairs.split_once("\n").unwrap();
+            let (left, right) = pairs.split_once('\n').unwrap();
             let left = Packet::parse(left);
             let right = Packet::parse(right);
 

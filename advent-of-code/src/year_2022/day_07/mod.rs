@@ -66,11 +66,8 @@ impl FS {
     }
 
     fn push(&mut self, fs: FS) {
-        match self {
-            FS::Dir { name: _, contents } => {
-                contents.insert(fs.name(), fs);
-            }
-            _ => (),
+        if let FS::Dir { name: _, contents } = self {
+            contents.insert(fs.name(), fs);
         }
     }
 
@@ -89,13 +86,13 @@ fn process_input_first(input: &str) -> u32 {
 
     let mut size_sum = 0;
 
-    for line in input.split("\n").into_iter() {
+    for line in input.split('\n') {
         let mut split_line = line.split_whitespace();
         if line.starts_with("$ ls") {
             continue;
         }
         if line.starts_with("$ cd ") {
-            if line.ends_with("/") {
+            if line.ends_with('/') {
                 continue;
             }
             if line.ends_with("..") {
@@ -141,13 +138,13 @@ fn process_input_second(input: &str) -> u32 {
 
     let mut dir_sizes = HashMap::new();
 
-    for line in input.split("\n").into_iter() {
+    for line in input.split('\n') {
         let mut split_line = line.split_whitespace();
         if line.starts_with("$ ls") {
             continue;
         }
         if line.starts_with("$ cd ") {
-            if line.ends_with("/") {
+            if line.ends_with('/') {
                 continue;
             }
             if line.ends_with("..") {

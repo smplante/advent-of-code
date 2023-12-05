@@ -27,21 +27,21 @@ pub fn run() {
 fn process_input_first(target: i64, input: &str) -> i64 {
     let mut beacons = HashSet::new();
     let mut ranges = input
-        .split("\n")
+        .split('\n')
         .map(|line| {
-            let sensor = &line[(line.find("x").unwrap())..(line.find(":").unwrap())];
-            let sensor_x = sensor[(sensor.find("x").unwrap() + 2)..(sensor.find(",").unwrap())]
+            let sensor = &line[(line.find('x').unwrap())..(line.find(':').unwrap())];
+            let sensor_x = sensor[(sensor.find('x').unwrap() + 2)..(sensor.find(',').unwrap())]
                 .parse::<i64>()
                 .unwrap();
-            let sensor_y = sensor[(sensor.find("y").unwrap() + 2)..]
+            let sensor_y = sensor[(sensor.find('y').unwrap() + 2)..]
                 .parse::<i64>()
                 .unwrap();
 
-            let beacon = &line[(line.find(":").unwrap())..];
-            let beacon_x = beacon[(beacon.find("x").unwrap() + 2)..(beacon.find(",").unwrap())]
+            let beacon = &line[(line.find(':').unwrap())..];
+            let beacon_x = beacon[(beacon.find('x').unwrap() + 2)..(beacon.find(',').unwrap())]
                 .parse::<i64>()
                 .unwrap();
-            let beacon_y = beacon[(beacon.find("y").unwrap() + 2)..]
+            let beacon_y = beacon[(beacon.find('y').unwrap() + 2)..]
                 .parse::<i64>()
                 .unwrap();
 
@@ -101,21 +101,21 @@ fn process_input_first(target: i64, input: &str) -> i64 {
 
 fn process_input_second(target: i64, input: &str) -> i64 {
     let ranges = input
-        .split("\n")
+        .split('\n')
         .map(|line| {
-            let sensor = &line[(line.find("x").unwrap())..(line.find(":").unwrap())];
-            let sensor_x = sensor[(sensor.find("x").unwrap() + 2)..(sensor.find(",").unwrap())]
+            let sensor = &line[(line.find('x').unwrap())..(line.find(':').unwrap())];
+            let sensor_x = sensor[(sensor.find('x').unwrap() + 2)..(sensor.find(',').unwrap())]
                 .parse::<i64>()
                 .unwrap();
-            let sensor_y = sensor[(sensor.find("y").unwrap() + 2)..]
+            let sensor_y = sensor[(sensor.find('y').unwrap() + 2)..]
                 .parse::<i64>()
                 .unwrap();
 
-            let beacon = &line[(line.find(":").unwrap())..];
-            let beacon_x = beacon[(beacon.find("x").unwrap() + 2)..(beacon.find(",").unwrap())]
+            let beacon = &line[(line.find(':').unwrap())..];
+            let beacon_x = beacon[(beacon.find('x').unwrap() + 2)..(beacon.find(',').unwrap())]
                 .parse::<i64>()
                 .unwrap();
-            let beacon_y = beacon[(beacon.find("y").unwrap() + 2)..]
+            let beacon_y = beacon[(beacon.find('y').unwrap() + 2)..]
                 .parse::<i64>()
                 .unwrap();
 
@@ -142,7 +142,7 @@ fn process_input_second(target: i64, input: &str) -> i64 {
         });
 
         if ranges[0].0 > 0 {
-            return 0 * 4000000 + y;
+            return y;
         }
 
         let mut end = ranges[0].1;

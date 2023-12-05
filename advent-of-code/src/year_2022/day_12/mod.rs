@@ -42,7 +42,7 @@ fn process_input_first(input: &str) -> u16 {
     let mut end = (0, 0);
 
     let mut map = input
-        .split("\n")
+        .split('\n')
         .enumerate()
         .map(|(y, row)| {
             row.chars()
@@ -64,7 +64,7 @@ fn process_input_first(input: &str) -> u16 {
 
     let mut walk_points: Vec<(usize, usize, u16)> = vec![(start.0, start.1, 0)];
 
-    while walk_points.len() > 0 {
+    while !walk_points.is_empty() {
         let (x, y, steps_from_start) = walk_points.remove(0);
 
         let steps_from_start = steps_from_start + 1;
@@ -104,7 +104,7 @@ fn process_input_second(input: &str) -> u16 {
     let mut end = (0, 0);
 
     let mut map = input
-        .split("\n")
+        .split('\n')
         .enumerate()
         .map(|(y, row)| {
             row.chars()
@@ -126,7 +126,7 @@ fn process_input_second(input: &str) -> u16 {
 
     let mut walk_points: Vec<(usize, usize, u16)> = vec![(end.0, end.1, 0)];
 
-    while walk_points.len() > 0 {
+    while !walk_points.is_empty() {
         let (x, y, steps_from_start) = walk_points.remove(0);
 
         let steps_from_start = steps_from_start + 1;
@@ -143,7 +143,7 @@ fn process_input_second(input: &str) -> u16 {
             if map[y][x].height == map[to_y][to_x].height + 1
                 && map[to_y][to_x].steps_from_start > steps_from_start
             {
-                if map[to_y][to_x].height == 'a' as u8 {
+                if map[to_y][to_x].height == b'a' {
                     return steps_from_start;
                 }
                 map[to_y][to_x].steps_from_start = steps_from_start;
@@ -154,7 +154,7 @@ fn process_input_second(input: &str) -> u16 {
             if map[y][x].height <= map[to_y][to_x].height
                 && map[to_y][to_x].steps_from_start > steps_from_start
             {
-                if map[to_y][to_x].height == 'a' as u8 {
+                if map[to_y][to_x].height == b'a' {
                     return steps_from_start;
                 }
                 map[to_y][to_x].steps_from_start = steps_from_start;

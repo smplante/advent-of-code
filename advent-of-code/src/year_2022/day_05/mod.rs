@@ -27,7 +27,7 @@ fn process_input_first(input: &str) -> String {
 
     let (first_half, second_half) = input.split_once("\n\n").unwrap();
 
-    let first_half = first_half.split("\n").collect::<Vec<&str>>();
+    let first_half = first_half.split('\n').collect::<Vec<&str>>();
     for _ in 0..((first_half[0].len() + 1) / 4) {
         stacks.push(Vec::new());
     }
@@ -50,9 +50,9 @@ fn process_input_first(input: &str) -> String {
     });
 
     second_half
-        .split("\n")
+        .split('\n')
         .map(|line| {
-            let command_raw = line.split(" ").collect::<Vec<&str>>();
+            let command_raw = line.split(' ').collect::<Vec<&str>>();
             (
                 command_raw[1].parse::<usize>().unwrap(),
                 command_raw[3].parse::<usize>().unwrap() - 1,
@@ -80,7 +80,7 @@ fn process_input_second(input: &str) -> String {
 
     let (first_half, second_half) = input.split_once("\n\n").unwrap();
 
-    let first_half = first_half.split("\n").collect::<Vec<&str>>();
+    let first_half = first_half.split('\n').collect::<Vec<&str>>();
     for _ in 0..((first_half[0].len() + 1) / 4) {
         stacks.push(Vec::new());
     }
@@ -103,9 +103,9 @@ fn process_input_second(input: &str) -> String {
     });
 
     second_half
-        .split("\n")
+        .split('\n')
         .map(|line| {
-            let command_raw = line.split(" ").collect::<Vec<&str>>();
+            let command_raw = line.split(' ').collect::<Vec<&str>>();
             (
                 command_raw[1].parse::<usize>().unwrap(),
                 command_raw[3].parse::<usize>().unwrap() - 1,

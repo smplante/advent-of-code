@@ -54,8 +54,8 @@ pub fn run() {
 
 fn char_to_priority(c: &char) -> u32 {
     match *c as u32 {
-        upper if upper >= 65 && upper <= 90 => upper - 38,
-        lower if lower >= 97 && lower <= 122 => lower - 96,
+        upper if (65..=90).contains(&upper) => upper - 38,
+        lower if (97..=122).contains(&lower) => lower - 96,
         _ => 0,
     }
 }
@@ -65,8 +65,7 @@ fn process_input_second(input: &str) -> Vec<[HashSet<char>; 3]> {
     let mut elves: [HashSet<char>; 3] = [HashSet::new(), HashSet::new(), HashSet::new()];
 
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .enumerate()
         .for_each(|(pos, rucksack_raw)| {
             elves[pos % 3] = rucksack_raw.chars().collect::<HashSet<char>>();
@@ -82,8 +81,7 @@ fn process_input_second(input: &str) -> Vec<[HashSet<char>; 3]> {
 
 fn process_input_first(input: &str) -> Vec<HashSet<char>> {
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .map(|rucksack_raw| {
             let (left, right) = rucksack_raw.split_at(rucksack_raw.len() / 2);
 

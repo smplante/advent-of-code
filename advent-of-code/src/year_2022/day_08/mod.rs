@@ -26,10 +26,9 @@ pub fn run() {
 
 fn process_input_first(input: &str) -> usize {
     let grid: Vec<Vec<u32>> = input
-        .split("\n")
+        .split('\n')
         .map(|s| {
             s.chars()
-                .into_iter()
                 .map(|i| i.to_string().parse::<u32>().unwrap())
                 .collect::<Vec<u32>>()
         })
@@ -111,10 +110,9 @@ fn process_input_first(input: &str) -> usize {
 
 fn process_input_second(input: &str) -> usize {
     let grid: Vec<Vec<u32>> = input
-        .split("\n")
+        .split('\n')
         .map(|s| {
             s.chars()
-                .into_iter()
                 .map(|i| i.to_string().parse::<u32>().unwrap())
                 .collect::<Vec<u32>>()
         })

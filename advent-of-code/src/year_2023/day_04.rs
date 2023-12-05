@@ -1,5 +1,4 @@
 use itertools::Itertools;
-use rayon::prelude::*;
 
 aoc_pm::run!(2023, 04, 13, 30);
 

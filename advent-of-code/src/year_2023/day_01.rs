@@ -1,5 +1,3 @@
-use rayon::prelude::*;
-
 aoc_pm::run!(2023, 01, 142, 281);
 
 const NUMS: [(&[u8], u8); 9] = [

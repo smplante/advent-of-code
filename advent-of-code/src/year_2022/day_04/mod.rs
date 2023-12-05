@@ -24,14 +24,13 @@ pub fn run() {
 
 fn process_input_first(input: &str) -> u32 {
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .map(|pairs| {
             pairs
-                .split_once(",")
+                .split_once(',')
                 .map(|(left, right)| {
                     let left = left
-                        .split_once("-")
+                        .split_once('-')
                         .map(|(low, high)| {
                             (
                                 low.parse::<u32>().expect("values should be integers"),
@@ -40,7 +39,7 @@ fn process_input_first(input: &str) -> u32 {
                         })
                         .expect("inputs should already be sanitized");
                     let right = right
-                        .split_once("-")
+                        .split_once('-')
                         .map(|(low, high)| {
                             (
                                 low.parse::<u32>().expect("values should be integers"),
@@ -69,14 +68,13 @@ fn process_input_first(input: &str) -> u32 {
 
 fn process_input_second(input: &str) -> u32 {
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .map(|pairs| {
             pairs
-                .split_once(",")
+                .split_once(',')
                 .map(|(left, right)| {
                     let left = left
-                        .split_once("-")
+                        .split_once('-')
                         .map(|(low, high)| {
                             (
                                 low.parse::<u32>().expect("values should be integers"),
@@ -85,7 +83,7 @@ fn process_input_second(input: &str) -> u32 {
                         })
                         .expect("inputs should already be sanitized");
                     let right = right
-                        .split_once("-")
+                        .split_once('-')
                         .map(|(low, high)| {
                             (
                                 low.parse::<u32>().expect("values should be integers"),

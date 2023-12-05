@@ -1,7 +1,3 @@
-use itertools::Itertools;
-use rayon::prelude::*;
-use std::io::BufRead;
-
 aoc_pm::run!(2023, 03, 4361, 467835);
 
 pub fn part_1(input: &str) -> u32 {
@@ -22,11 +18,11 @@ pub fn part_1(input: &str) -> u32 {
         let i = width.map_or(i, |w| i % w);
 
         match b {
-            b if b >= b'0' && b <= b'9' => {
+            b if b.is_ascii_digit() => {
                 num.push(b - b'0');
                 start_end = Some(start_end.map_or((i, i), |se| (se.0, i)));
             }
-            b'.' if (&num).len() > 0 => {
+            b'.' if !num.is_empty() => {
                 let mut s = 0u32;
                 for &n in num.iter() {
                     s = s * 10 + n as u32;
@@ -41,7 +37,7 @@ pub fn part_1(input: &str) -> u32 {
             }
             b'\n' => {
                 width = width.or(Some(i + 1));
-                if num.len() > 0 {
+                if !num.is_empty() {
                     let mut s = 0u32;
                     for &n in num.iter() {
                         s = s * 10 + n as u32;
@@ -57,7 +53,7 @@ pub fn part_1(input: &str) -> u32 {
                 parts.push(Vec::new());
             }
             _ => {
-                if num.len() > 0 {
+                if !num.is_empty() {
                     let mut s = 0u32;
                     for &n in num.iter() {
                         s = s * 10 + n as u32;
@@ -134,11 +130,11 @@ pub fn part_2(input: &str) -> u32 {
         let i = width.map_or(i, |w| i % w);
 
         match b {
-            b if b >= b'0' && b <= b'9' => {
+            b if b.is_ascii_digit() => {
                 num.push(b - b'0');
                 start_end = Some(start_end.map_or((i, i), |se| (se.0, i)));
             }
-            b'.' if (&num).len() > 0 => {
+            b'.' if !num.is_empty() => {
                 let mut s = 0u32;
                 for &n in num.iter() {
                     s = s * 10 + n as u32;
@@ -153,7 +149,7 @@ pub fn part_2(input: &str) -> u32 {
             }
             b'\n' => {
                 width = width.or(Some(i + 1));
-                if num.len() > 0 {
+                if !num.is_empty() {
                     let mut s = 0u32;
                     for &n in num.iter() {
                         s = s * 10 + n as u32;
@@ -169,7 +165,7 @@ pub fn part_2(input: &str) -> u32 {
                 parts.push(Vec::new());
             }
             b'*' => {
-                if num.len() > 0 {
+                if !num.is_empty() {
                     let mut s = 0u32;
                     for &n in num.iter() {
                         s = s * 10 + n as u32;

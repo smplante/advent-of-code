@@ -110,15 +110,15 @@ fn process_input_first(input: &str) -> usize {
     let mut rope = Rope::new(2);
 
     input
-        .split("\n")
+        .split('\n')
         .map(|c| {
-            let (direction, count) = c.split_once(" ").unwrap();
+            let (direction, count) = c.split_once(' ').unwrap();
             match direction {
                 "U" => (Direction::Up, count.parse::<i32>().unwrap()),
                 "D" => (Direction::Down, count.parse::<i32>().unwrap()),
                 "L" => (Direction::Left, count.parse::<i32>().unwrap()),
                 "R" => (Direction::Right, count.parse::<i32>().unwrap()),
-                _ => Err("invalid input").unwrap(),
+                _ => todo!(),
             }
         })
         .for_each(|m| {
@@ -132,15 +132,15 @@ fn process_input_second(input: &str) -> usize {
     let mut rope = Rope::new(10);
 
     input
-        .split("\n")
+        .split('\n')
         .map(|c| {
-            let (direction, count) = c.split_once(" ").unwrap();
+            let (direction, count) = c.split_once(' ').unwrap();
             match direction {
                 "U" => (Direction::Up, count.parse::<i32>().unwrap()),
                 "D" => (Direction::Down, count.parse::<i32>().unwrap()),
                 "L" => (Direction::Left, count.parse::<i32>().unwrap()),
                 "R" => (Direction::Right, count.parse::<i32>().unwrap()),
-                _ => Err("invalid input").unwrap(),
+                _ => todo!(),
             }
         })
         .for_each(|m| {

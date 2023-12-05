@@ -27,7 +27,7 @@ pub fn run() {
 fn process_input_first(input: &str) -> u32 {
     let size = 4;
     let mut pos = 0;
-    let chars = input.chars().into_iter().collect::<Vec<char>>();
+    let chars = input.chars().collect::<Vec<char>>();
     let windows = chars.windows(size);
     for window in windows {
         if window[0] != window[1]
@@ -48,7 +48,7 @@ fn process_input_first(input: &str) -> u32 {
 fn process_input_second(input: &str) -> u32 {
     let size = 14;
     let mut pos = 0;
-    let chars = input.chars().into_iter().collect::<Vec<char>>();
+    let chars = input.chars().collect::<Vec<char>>();
     let windows = chars.windows(size);
     for window in windows {
         if window.iter().collect::<HashSet<&char>>().len() == size {

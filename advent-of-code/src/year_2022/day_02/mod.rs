@@ -53,8 +53,7 @@ fn letter_to_target_move(opponent: &str, target: &str) -> Move {
 
 fn process_input_first(input: &str) -> Vec<(Move, Move)> {
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();
             (letter_to_move(matchup[0]), letter_to_move(matchup[1]))
@@ -64,8 +63,7 @@ fn process_input_first(input: &str) -> Vec<(Move, Move)> {
 
 fn process_input_second(input: &str) -> Vec<(Move, Move)> {
     input
-        .split("\n")
-        .into_iter()
+        .split('\n')
         .map(|matchup_raw| {
             let matchup: Vec<&str> = matchup_raw.split_whitespace().collect();
             (
@@ -82,12 +80,12 @@ fn calculate_strategy(matchups: Vec<(Move, Move)>) -> u32 {
         .map(|matchup| match (&matchup.0, &matchup.1) {
             (Move::Rock(_), Move::Rock(b)) => b + 3,
             (Move::Rock(_), Move::Paper(b)) => b + 6,
-            (Move::Rock(_), Move::Scissors(b)) => b + 0,
-            (Move::Paper(_), Move::Rock(b)) => b + 0,
+            (Move::Rock(_), Move::Scissors(b)) => *b,
+            (Move::Paper(_), Move::Rock(b)) => *b,
             (Move::Paper(_), Move::Paper(b)) => b + 3,
             (Move::Paper(_), Move::Scissors(b)) => b + 6,
             (Move::Scissors(_), Move::Rock(b)) => b + 6,
-            (Move::Scissors(_), Move::Paper(b)) => b + 0,
+            (Move::Scissors(_), Move::Paper(b)) => *b,
             (Move::Scissors(_), Move::Scissors(b)) => b + 3,
         })
         .sum::<u32>()

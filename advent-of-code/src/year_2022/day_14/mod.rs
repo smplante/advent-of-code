@@ -35,10 +35,10 @@ fn process_input_first(input: &str) -> usize {
     let mut max_x = usize::MIN;
     let mut max_y = usize::MIN;
 
-    input.split("\n").for_each(|line| {
+    input.split('\n').for_each(|line| {
         line.split(" -> ")
             .map(|coord| {
-                let coord = coord.split_once(",").unwrap();
+                let coord = coord.split_once(',').unwrap();
 
                 (
                     coord.0.parse::<usize>().unwrap(),
@@ -124,10 +124,10 @@ fn process_input_second(input: &str) -> usize {
     let mut max_x = usize::MIN;
     let mut max_y = usize::MIN;
 
-    input.split("\n").for_each(|line| {
+    input.split('\n').for_each(|line| {
         line.split(" -> ")
             .map(|coord| {
-                let coord = coord.split_once(",").unwrap();
+                let coord = coord.split_once(',').unwrap();
 
                 (
                     coord.0.parse::<usize>().unwrap(),

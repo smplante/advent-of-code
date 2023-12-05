@@ -1,11 +1,6 @@
-use rayon::prelude::*;
 use std::cmp::max;
 
 aoc_pm::run!(2023, 02, 8, 2286);
-
-pub fn part_1_rayon(input: &str) -> u32 {
-    input.lines().par_bridge().map(parse_line_1).sum()
-}
 
 pub fn part_1(input: &str) -> u32 {
     input.lines().map(parse_line_1).sum()
@@ -46,10 +41,6 @@ fn parse_line_1(line: &str) -> u32 {
     }
 
     value
-}
-
-pub fn part_2_rayon(input: &str) -> u32 {
-    input.lines().par_bridge().map(parse_line_2).sum()
 }
 
 pub fn part_2(input: &str) -> u32 {
