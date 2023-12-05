@@ -1,7 +1,7 @@
 use rayon::prelude::*;
 use std::cmp::max;
 
-aoc_pm::make_run!(2023_02);
+aoc_pm::run!(2023, 02, 8, 2286);
 
 pub fn part_1_rayon(input: &str) -> u32 {
     input.lines().par_bridge().map(parse_line_1).sum()

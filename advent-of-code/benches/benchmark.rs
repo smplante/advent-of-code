@@ -1,6 +1,7 @@
 extern crate aoc_lib;
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use aoc_pm::benchmark;
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::time::Duration;
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -13,53 +14,10 @@ fn criterion_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("2023");
     group.sample_size(100).warm_up_time(Duration::from_secs(5));
 
-    let d = aoc_lib::year_2023::Data::get("day_01_part_1")
-        .expect("file to exist")
-        .data;
-    let data = std::str::from_utf8(&d).expect("to be a string");
-    group.bench_function("Day 01 Part 1", |b| {
-        b.iter(|| aoc_lib::year_2023::day_01::part_1(black_box(data)))
-    });
-    group.bench_function("Day 01 Part 2", |b| {
-        b.iter(|| aoc_lib::year_2023::day_01::part_2(black_box(data)))
-    });
-    // group.bench_function("Day 01", |b| b.iter(|| aoc_lib::year_2023::day_01::run()));
-
-    let d = aoc_lib::year_2023::Data::get("day_02_part_1")
-        .expect("file to exist")
-        .data;
-    let data = std::str::from_utf8(&d).expect("to be a string");
-    group.bench_function("Day 02 Part 1", |b| {
-        b.iter(|| aoc_lib::year_2023::day_02::part_1(black_box(data)))
-    });
-    group.bench_function("Day 02 Part 2", |b| {
-        b.iter(|| aoc_lib::year_2023::day_02::part_2(black_box(data)))
-    });
-    // group.bench_function("Day 02", |b| b.iter(|| aoc_lib::year_2023::day_02::run()));
-
-    let d = aoc_lib::year_2023::Data::get("day_03_part_1")
-        .expect("file to exist")
-        .data;
-    let data = std::str::from_utf8(&d).expect("to be a string");
-    group.bench_function("Day 03 Part 1", |b| {
-        b.iter(|| aoc_lib::year_2023::day_03::part_1(black_box(data)))
-    });
-    group.bench_function("Day 03 Part 2", |b| {
-        b.iter(|| aoc_lib::year_2023::day_03::part_2(black_box(data)))
-    });
-    // group.bench_function("Day 03", |b| b.iter(|| aoc_lib::year_2023::day_03::run()));
-
-    let d = aoc_lib::year_2023::Data::get("day_04_part_1")
-        .expect("file to exist")
-        .data;
-    let data = std::str::from_utf8(&d).expect("to be a string");
-    group.bench_function("Day 04 Part 1", |b| {
-        b.iter(|| aoc_lib::year_2023::day_04::part_1(black_box(data)))
-    });
-    group.bench_function("Day 04 Part 2", |b| {
-        b.iter(|| aoc_lib::year_2023::day_04::part_2(black_box(data)))
-    });
-    // group.bench_function("Day 04", |b| b.iter(|| aoc_lib::year_2023::day_04::run()));
+    benchmark!(group, 2023, 01);
+    benchmark!(group, 2023, 02);
+    benchmark!(group, 2023, 03);
+    benchmark!(group, 2023, 04);
 }
 
 criterion_group!(benches, criterion_benchmark);

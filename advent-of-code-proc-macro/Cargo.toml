@@ -2,6 +2,7 @@
 name = "advent-of-code-proc-macro"
 version = "0.1.0"
 edition = "2021"
+resolver = "2"
 
 [lib]
 name = "aoc_pm"

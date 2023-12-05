@@ -1,6 +1,6 @@
 use rayon::prelude::*;
 
-aoc_pm::make_run!(2023_01);
+aoc_pm::run!(2023, 01, 142, 281);
 
 const NUMS: [(&[u8], u8); 9] = [
     (b"one", b'1'),
@@ -13,10 +13,6 @@ const NUMS: [(&[u8], u8); 9] = [
     (b"eight", b'8'),
     (b"nine", b'9'),
 ];
-
-pub fn part_1_rayon(input: &str) -> u32 {
-    input.lines().par_bridge().map(parse_line_1).sum()
-}
 
 pub fn part_1(input: &str) -> u32 {
     input.lines().map(parse_line_1).sum()
@@ -36,21 +32,9 @@ fn parse_line_1(line: &str) -> u32 {
         idx += 1;
     }
 
-    idx = line_bytes.len() - 1;
-    loop {
-        if line_bytes[idx].is_ascii_digit() {
-            n += line_bytes[idx] - b'0';
-            break;
-        }
-
-        idx -= 1;
-    }
+    n += line_bytes.iter().rfind(|b| b.is_ascii_digit()).unwrap() - b'0';
 
     n as u32
-}
-
-pub fn part_2_rayon(input: &str) -> u32 {
-    input.lines().par_bridge().map(parse_line_2).sum()
 }
 
 pub fn part_2(input: &str) -> u32 {

@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use rayon::prelude::*;
 
-aoc_pm::make_run!(2023_04);
+aoc_pm::run!(2023, 04, 13, 30);
 
 pub fn part_1(input: &str) -> u32 {
     input.lines().map(parse_line_1).sum()

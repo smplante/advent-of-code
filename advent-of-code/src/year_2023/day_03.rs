@@ -1,6 +1,8 @@
+use itertools::Itertools;
 use rayon::prelude::*;
 use std::io::BufRead;
-aoc_pm::make_run!(2023_03);
+
+aoc_pm::run!(2023, 03, 4361, 467835);
 
 pub fn part_1(input: &str) -> u32 {
     let lb = input.as_bytes();
@@ -245,6 +247,14 @@ mod tests {
 
     #[test]
     fn part_1_sample() {
+        let d = Data::get("day_03_sample_2")
+            .expect("src/year_2023/day_03_sample_1 does not exist")
+            .data;
+        let input = std::str::from_utf8(&d).expect("d must be a string");
+        assert_eq!(day_03::part_1(input), 4361);
+    }
+    #[test]
+    fn part_1_sample_new() {
         let d = Data::get("day_03_sample_2")
             .expect("src/year_2023/day_03_sample_1 does not exist")
             .data;
