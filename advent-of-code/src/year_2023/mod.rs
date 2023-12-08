@@ -6,6 +6,7 @@ pub mod day_03;
 pub mod day_04;
 pub mod day_05;
 pub mod day_06;
+pub mod day_07;
 
 #[derive(RustEmbed)]
 #[folder = "src/year_2023/data"]
@@ -19,5 +20,6 @@ pub fn run() {
     day_04::run();
     day_05::run();
     day_06::run();
+    day_07::run();
     println!("All days completed in: {:?}\n\n", start.elapsed().unwrap());
 }
