@@ -1,6 +1,8 @@
 extern crate proc_macro;
 
+use itertools::Itertools;
 use proc_macro::{TokenStream, TokenTree};
+use regex::bytes::{Match, Regex};
 
 /// Returns the necessary `run` function
 ///
@@ -120,25 +122,74 @@ pub fn benchmark(ts: TokenStream) -> TokenStream {
         _ => None,
     });
 
-    let group = inputs.next().unwrap();
     let year = inputs.next().unwrap();
     let day = inputs.next().unwrap();
-    r#"
-let d = aoc_lib::year_{YEAR}::Data::get("day_{DAY}_part_1")
-    .expect("file to exist")
-    .data;
-let data = std::str::from_utf8(&d).expect("to be a string");
-{GROUP}.bench_function("Day {DAY} Part 1", |b| {
-    b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::part_1(criterion::black_box(data)))
-});
-{GROUP}.bench_function("Day {DAY} Part 2", |b| {
-    b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::part_2(criterion::black_box(data)))
-});
-{GROUP}.bench_function("Day {DAY}", |b| b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::run_no_print()));
-"#
-    .replace("{GROUP}", &group)
-    .replace("{YEAR}", &year)
-    .replace("{DAY}", &day)
-    .parse()
-    .unwrap()
+
+    let part_1_regex = Regex::new(r##"pub fn (part_1[^\(\ \"]*)"##).unwrap();
+    let part_2_regex = Regex::new(r##"pub fn (part_2[^\(\ \"]*)"##).unwrap();
+
+    let contents = std::fs::read(format!("advent-of-code/src/year_{year}/day_{day}.rs")).unwrap();
+
+    let part_1_funcs = part_1_regex
+        .captures_iter(&contents)
+        .map(|m| {
+            let (_, [func]) = m.extract();
+            func
+        })
+        .sorted()
+        .unique()
+        .collect::<Vec<&[u8]>>();
+
+    let part_2_funcs = part_2_regex
+        .captures_iter(&contents)
+        .map(|m| {
+            let (_, [func]) = m.extract();
+            func
+        })
+        .sorted()
+        .unique()
+        .collect::<Vec<&[u8]>>();
+
+    let mut code_gen = Vec::new();
+    code_gen.push(
+        r#"let mut group_day_{DAY} = c.benchmark_group("{YEAR} Day {DAY}");
+    let input_1 = aoc_lib::year_{YEAR}::Data::get("day_{DAY}_part_1")
+        .expect("file to exist")
+        .data;
+    let input_1 = std::str::from_utf8(&input_1).unwrap();
+    let input_2 = aoc_lib::year_{YEAR}::Data::get("day_{DAY}_part_2")
+        .expect("file to exist")
+        .data;
+    let input_2 = std::str::from_utf8(&input_2).unwrap();"#
+            .to_string(),
+    );
+
+    for func in part_1_funcs {
+        let func = std::str::from_utf8(func).unwrap();
+        let x = r#"group_day_{DAY}.bench_with_input("{func}", &input_1, |b, i| {
+    b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::{func}(i))
+});"#
+            .replace("{func}", func);
+        code_gen.push(x);
+    }
+
+    for func in part_2_funcs {
+        let func = std::str::from_utf8(func).unwrap();
+        let x = r#"group_day_{DAY}.bench_with_input("{func}", &input_2, |b, i| {
+    b.iter(|| aoc_lib::year_{YEAR}::day_{DAY}::{func}(i))
+});"#
+            .replace("{func}", func);
+        code_gen.push(x);
+    }
+
+    code_gen.push("group_day_{DAY}.finish();".to_string());
+
+    let r = code_gen
+        .join("\n")
+        .replace("{YEAR}", &year)
+        .replace("{DAY}", &day)
+        .parse()
+        .unwrap();
+
+    r
 }
