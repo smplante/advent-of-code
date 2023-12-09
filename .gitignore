@@ -12,3 +12,6 @@ Cargo.lock
 
 # jetbrains
 /.idea
+
+# don't include AoC inputs
+**/data/*
