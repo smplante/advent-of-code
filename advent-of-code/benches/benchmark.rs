@@ -1,8 +1,7 @@
 extern crate aoc_lib;
 
 use aoc_pm::benchmark;
-use criterion::{criterion_group, criterion_main, Criterion};
-use std::time::Duration;
+use criterion::{criterion_group, Criterion};
 
 fn criterion_benchmark(c: &mut Criterion) {
     rayon::ThreadPoolBuilder::new()
@@ -19,7 +18,12 @@ fn criterion_benchmark(c: &mut Criterion) {
     benchmark!(2023, 07);
     benchmark!(2023, 08);
     benchmark!(2023, 09);
+    benchmark!(2023, 10);
 }
 
 criterion_group!(benches, criterion_benchmark);
-criterion_main!(benches);
+
+fn main() {
+    benches();
+    Criterion::default().configure_from_args().final_summary();
+}
