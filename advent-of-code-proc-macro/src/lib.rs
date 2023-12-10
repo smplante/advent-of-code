@@ -125,8 +125,8 @@ pub fn benchmark(ts: TokenStream) -> TokenStream {
     let year = inputs.next().unwrap();
     let day = inputs.next().unwrap();
 
-    let part_1_regex = Regex::new(r##"pub fn (part_1[^\(\ \"]*)"##).unwrap();
-    let part_2_regex = Regex::new(r##"pub fn (part_2[^\(\ \"]*)"##).unwrap();
+    let part_1_regex = Regex::new(r##"\npub fn (part_1[^\(\ \"]*)"##).unwrap();
+    let part_2_regex = Regex::new(r##"\npub fn (part_2[^\(\ \"]*)"##).unwrap();
 
     let contents = std::fs::read(format!("advent-of-code/src/year_{year}/day_{day}.rs")).unwrap();
 
