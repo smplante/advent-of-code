@@ -10,11 +10,11 @@ const NUMS: [(&[u8], u8); 9] = [
     (b"nine", b'9'),
 ];
 
-pub fn part_1(input: &str) -> u32 {
+pub fn part_1(input: &str) -> Option<u32> {
     input.lines().map(parse_line_1).sum()
 }
 
-fn parse_line_1(line: &str) -> u32 {
+fn parse_line_1(line: &str) -> Option<u32> {
     let line_bytes = line.as_bytes();
     let mut n = 0;
 
@@ -28,13 +28,13 @@ fn parse_line_1(line: &str) -> u32 {
         idx += 1;
     }
 
-    n += line_bytes.iter().rfind(|b| b.is_ascii_digit()).unwrap() - b'0';
+    n += line_bytes.iter().rfind(|b| b.is_ascii_digit())? - b'0';
 
-    n as u32
+    Some(n as u32)
 }
 
-pub fn part_2(input: &str) -> u32 {
-    input.lines().map(parse_line_2).sum()
+pub fn part_2(input: &str) -> Option<u32> {
+    Some(input.lines().map(parse_line_2).sum())
 }
 
 fn parse_line_2(line: &str) -> u32 {

@@ -32,56 +32,54 @@ pub fn run(ts: TokenStream) -> TokenStream {
     let answer_2_sample = inputs.next().unwrap();
 
     r#"
-use crate::year_{YEAR}::Data;
-
 pub fn run() {
     eprintln!("--------------------------");
     eprintln!("Advent of Code {YEAR} Day {DAY}");
     eprintln!("--------------------------\n");
 
-    let sample_01_data_cow = Data::get("day_{DAY}_sample_1").expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist").data;
+    let sample_01_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_sample_1").expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist").data;
     let sample_01_data = std::str::from_utf8(&sample_01_data_cow).expect("sample_01_data_cow must be a string");
 
-    let sample_02_data_cow = Data::get("day_{DAY}_sample_2").expect("src/year_{YEAR}/day_{DAY}_sample_2 does not exist").data;
+    let sample_02_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_sample_2").expect("src/year_{YEAR}/day_{DAY}_sample_2 does not exist").data;
     let sample_02_data = std::str::from_utf8(&sample_02_data_cow).expect("sample_02_data_cow must be a string");
 
-    let part_01_data_cow = Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_1 does not exist").data;
+    let part_01_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_1 does not exist").data;
     let part_01_data = std::str::from_utf8(&part_01_data_cow).expect("part_01_data_cow must be a string");
 
-    let part_02_data_cow = Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_2 does not exist").data;
+    let part_02_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_2 does not exist").data;
     let part_02_data = std::str::from_utf8(&part_02_data_cow).expect("part_02_data_cow must be a string");
 
     let start = std::time::SystemTime::now();
     eprintln!(
         "sample:  first half: {}, second half: {}",
-        part_1(sample_01_data),
-        part_2(sample_02_data)
+        part_1(sample_01_data).expect("part 1 sample failed"),
+        part_2(sample_02_data).expect("part 2 sample failed")
     );
     eprintln!(
         "actual: first half: {}, second half: {}\n",
-        part_1(part_01_data),
-        part_2(part_02_data)
+        part_1(part_01_data).expect("part 1 actual failed"),
+        part_2(part_02_data).expect("part 2 actual failed")
     );
     eprintln!("Day {DAY} completed in: {:?}\n", start.elapsed().unwrap());
 }
 
 pub fn run_no_print() {
-    let sample_01_data_cow = Data::get("day_{DAY}_sample_1").expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist").data;
+    let sample_01_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_sample_1").expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist").data;
     let sample_01_data = std::str::from_utf8(&sample_01_data_cow).expect("sample_01_data_cow must be a string");
 
-    let sample_02_data_cow = Data::get("day_{DAY}_sample_2").expect("src/year_{YEAR}/day_{DAY}_sample_2 does not exist").data;
+    let sample_02_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_sample_2").expect("src/year_{YEAR}/day_{DAY}_sample_2 does not exist").data;
     let sample_02_data = std::str::from_utf8(&sample_02_data_cow).expect("sample_02_data_cow must be a string");
 
-    let part_01_data_cow = Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_1 does not exist").data;
+    let part_01_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_1 does not exist").data;
     let part_01_data = std::str::from_utf8(&part_01_data_cow).expect("part_01_data_cow must be a string");
 
-    let part_02_data_cow = Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_2 does not exist").data;
+    let part_02_data_cow = crate::year_{YEAR}::Data::get("day_{DAY}_part_1").expect("src/year_{YEAR}/day_{DAY}_part_2 does not exist").data;
     let part_02_data = std::str::from_utf8(&part_02_data_cow).expect("part_02_data_cow must be a string");
 
-    part_1(sample_01_data);
-    part_2(sample_02_data);
-    part_1(part_01_data);
-    part_2(part_02_data);
+    part_1(sample_01_data).expect("part 1 sample failed");
+    part_2(sample_02_data).expect("part 2 sample failed");
+    part_1(part_01_data).expect("part 1 actual failed");
+    part_2(part_02_data).expect("part 2 actual failed");
 }
 
 #[cfg(test)]
@@ -94,7 +92,7 @@ mod generated_tests {
             .expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_{DAY}::part_1(input), {ANSWER_1_SAMPLE});
+        assert_eq!(day_{DAY}::part_1(input).expect("part 1 sample failed"), {ANSWER_1_SAMPLE});
     }
 
     #[test]
@@ -103,7 +101,7 @@ mod generated_tests {
             .expect("src/year_{YEAR}/day_{DAY}_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_{DAY}::part_2(input), {ANSWER_2_SAMPLE});
+        assert_eq!(day_{DAY}::part_2(input).expect("part 2 sample failed"), {ANSWER_2_SAMPLE});
     }
 }
 

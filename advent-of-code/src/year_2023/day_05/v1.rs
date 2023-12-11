@@ -1,11 +1,10 @@
 use itertools::Itertools;
 
-pub fn part_1(input: &str) -> u64 {
+pub fn part_1(input: &str) -> Option<u64> {
     let mut lines = input.split('\n');
 
     let mut srcs = lines
-        .next()
-        .unwrap()
+        .next()?
         .split_ascii_whitespace()
         .filter_map(|chunk| chunk.parse::<u64>().ok())
         .collect_vec();
@@ -46,23 +45,22 @@ pub fn part_1(input: &str) -> u64 {
         }
     }
 
-    dsts.into_iter().min().unwrap()
+    dsts.into_iter().min()
 }
 
-pub fn part_2(input: &str) -> u64 {
+pub fn part_2(input: &str) -> Option<u64> {
     let mut lines = input.split('\n');
 
     let mut old_ranges = lines
-        .next()
-        .unwrap()
+        .next()?
         .split_ascii_whitespace()
         .skip(1)
         .chunks(2)
         .into_iter()
-        .map(|mut chunk| {
-            let start = chunk.next().unwrap().parse::<u64>().unwrap();
-            let range = chunk.next().unwrap().parse::<u64>().unwrap();
-            (start, start + range)
+        .filter_map(|mut chunk| {
+            let start = chunk.next()?.parse::<u64>().ok()?;
+            let range = chunk.next()?.parse::<u64>().ok()?;
+            Some((start, start + range))
         })
         .collect_vec();
 
@@ -152,12 +150,12 @@ pub fn part_2(input: &str) -> u64 {
         }
     }
 
-    smallest
+    Some(smallest)
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::year_2023::{day_05, Data};
+    use crate::year_2023::{day_05::v1::*, Data};
 
     #[test]
     fn part_1_actual() {
@@ -165,7 +163,7 @@ mod tests {
             .expect("src/year_2023/day_05_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_05::part_1(input), 825_516_882);
+        assert_eq!(part_1(input), Some(825_516_882));
     }
 
     #[test]
@@ -174,6 +172,6 @@ mod tests {
             .expect("src/year_2023/day_05_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_05::part_2(input), 136_096_660);
+        assert_eq!(part_2(input), Some(136_096_660));
     }
 }

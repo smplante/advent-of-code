@@ -3,14 +3,14 @@ use itertools::Itertools;
 use std::collections::{HashMap, HashSet};
 
 #[allow(dead_code)]
-pub fn part_1(input: &str) -> u32 {
+pub fn part_1(input: &str) -> Option<u32> {
     v2::part_1(input)
 }
 
 const A: u16 = 0u16;
 const Z: u16 = 25u16;
 
-pub fn part_2(input: &str) -> u64 {
+pub fn part_2(input: &str) -> Option<u64> {
     let input = input.replace(['=', '(', ')', ','], " ");
     let mut input = input.split_terminator('\n').filter(|s| !s.is_empty());
     let directions = input
@@ -74,7 +74,7 @@ pub fn part_2(input: &str) -> u64 {
                         }
                     }
                 }
-                return divs.iter().product::<usize>() as u64;
+                return Some(divs.iter().product::<usize>() as u64);
             }
         }
     }
@@ -95,7 +95,7 @@ mod tests {
             .expect("src/year_2023/day_08_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_1(input), 11_309);
+        assert_eq!(part_1(input), Some(11_309));
     }
 
     #[test]
@@ -104,6 +104,6 @@ mod tests {
             .expect("src/year_2023/day_08_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_2(input), 13_740_108_158_591);
+        assert_eq!(part_2(input), Some(13_740_108_158_591));
     }
 }

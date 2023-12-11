@@ -1,40 +1,40 @@
 use itertools::Itertools;
 
-pub fn part_1(input: &str) -> u32 {
-    let (t, d) = input.split_once('\n').unwrap();
+pub fn part_1(input: &str) -> Option<u32> {
+    let (t, d) = input.split_once('\n')?;
 
-    let times = parse_nums_1(t);
-    let distances = parse_nums_1(d);
+    let times = parse_nums_1(t)?;
+    let distances = parse_nums_1(d)?;
 
-    times
-        .into_iter()
-        .zip(distances)
-        .map(|(t, d)| {
-            let mut i = d / t;
-            while i * (t - i) <= d {
-                i += 1;
-            }
+    Some(
+        times
+            .into_iter()
+            .zip(distances)
+            .map(|(t, d)| {
+                let mut i = d / t;
+                while i * (t - i) <= d {
+                    i += 1;
+                }
 
-            1 + t - (2 * i)
-        })
-        .product()
+                1 + t - (2 * i)
+            })
+            .product(),
+    )
 }
 
-fn parse_nums_1(nums: &str) -> Vec<u32> {
-    nums.split_once(':')
-        .map(|(_, data)| {
-            data.split_whitespace()
-                .filter_map(|d| d.parse::<u32>().ok())
-                .collect_vec()
-        })
-        .unwrap()
+fn parse_nums_1(nums: &str) -> Option<Vec<u32>> {
+    nums.split_once(':').map(|(_, data)| {
+        data.split_whitespace()
+            .filter_map(|d| d.parse::<u32>().ok())
+            .collect_vec()
+    })
 }
 
-pub fn part_2(input: &str) -> u64 {
-    let (t, d) = input.split_once('\n').unwrap();
+pub fn part_2(input: &str) -> Option<u64> {
+    let (t, d) = input.split_once('\n')?;
 
-    let t = parse_nums_2(t);
-    let d = parse_nums_2(d);
+    let t = parse_nums_2(t)?;
+    let d = parse_nums_2(d)?;
 
     let mut i = solve_quadratic(1.0, t as f64, d as f64) as u64;
     while i * (t - i) > d {
@@ -44,7 +44,7 @@ pub fn part_2(input: &str) -> u64 {
         i += 1;
     }
 
-    1 + t - (2 * i)
+    Some(1 + t - (2 * i))
 }
 
 // d = x * (t - x)
@@ -56,10 +56,13 @@ fn solve_quadratic(a: f64, b: f64, c: f64) -> f64 {
     (b - f64::sqrt(b.powi(2) - (4.0 * a * c))) / (2.0 * a)
 }
 
-fn parse_nums_2(nums: &str) -> u64 {
-    nums.split_once(':')
-        .map(|(_, data)| data.split_whitespace().join("").parse::<u64>().unwrap())
-        .unwrap()
+fn parse_nums_2(nums: &str) -> Option<u64> {
+    nums.split_once(':')?
+        .1
+        .split_whitespace()
+        .join("")
+        .parse::<u64>()
+        .ok()
 }
 
 #[cfg(test)]
@@ -72,7 +75,7 @@ mod tests {
             .expect("src/year_2023/day_06_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_06::part_1(input), 4_568_778);
+        assert_eq!(day_06::part_1(input), Some(4_568_778));
     }
 
     #[test]
@@ -81,6 +84,6 @@ mod tests {
             .expect("src/year_2023/day_06_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_06::part_2(input), 28_973_936);
+        assert_eq!(day_06::part_2(input), Some(28_973_936));
     }
 }

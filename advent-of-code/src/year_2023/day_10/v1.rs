@@ -1,13 +1,12 @@
 use itertools::Itertools;
 
-pub fn part_1(input: &str) -> u32 {
+pub fn part_1(input: &str) -> Option<u32> {
     let map = input.lines().map(str::as_bytes).collect::<Vec<&[u8]>>();
 
     let (mut pos_x, mut pos_y) = map
         .iter()
         .enumerate()
-        .find_map(|(y, &xs)| Some((xs.iter().position(|x| x == &b'S')?, y)))
-        .unwrap();
+        .find_map(|(y, &xs)| Some((xs.iter().position(|x| x == &b'S')?, y)))?;
 
     let (start_x, start_y) = (pos_x, pos_y);
     let mut dir = Dir::Down;
@@ -56,7 +55,7 @@ pub fn part_1(input: &str) -> u32 {
         }
     }
 
-    steps / 2
+    Some(steps / 2)
 }
 
 #[derive(Debug)]
@@ -87,7 +86,7 @@ fn walk(dir: &Dir, pos: (usize, usize), fence: u8) -> Option<(Dir, (usize, usize
 }
 
 #[allow(dead_code)]
-pub fn part_2(input: &str) -> usize {
+pub fn part_2(input: &str) -> Option<usize> {
     let map = input
         .lines()
         .map(str::as_bytes)
@@ -101,8 +100,7 @@ pub fn part_2(input: &str) -> usize {
     let (mut pos_x, mut pos_y) = map
         .iter()
         .enumerate()
-        .find_map(|(y, xs)| Some((xs.iter().position(|x| x == &b'S')?, y)))
-        .unwrap();
+        .find_map(|(y, xs)| Some((xs.iter().position(|x| x == &b'S')?, y)))?;
 
     let (start_x, start_y) = (pos_x, pos_y);
     let start_dir = Dir::Down;
@@ -201,17 +199,19 @@ pub fn part_2(input: &str) -> usize {
         .map(|row| inside_outside(row))
         .collect_vec();
 
-    fence_map
-        .iter()
-        .enumerate()
-        .filter(|(y, _)| y % 2 == 0)
-        .map(|(_, r)| {
-            r.iter()
-                .enumerate()
-                .filter(|(x, &p)| x % 2 == 0 && p == b'.')
-                .count()
-        })
-        .sum()
+    Some(
+        fence_map
+            .iter()
+            .enumerate()
+            .filter(|(y, _)| y % 2 == 0)
+            .map(|(_, r)| {
+                r.iter()
+                    .enumerate()
+                    .filter(|(x, &p)| x % 2 == 0 && p == b'.')
+                    .count()
+            })
+            .sum(),
+    )
 }
 
 fn inside_outside(row: &[u8]) -> Vec<u8> {
@@ -274,7 +274,7 @@ mod tests {
             .expect("src/year_2023/day_10_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_1(input), 6786);
+        assert_eq!(part_1(input), Some(6786));
     }
 
     #[test]
@@ -283,7 +283,7 @@ mod tests {
             .expect("src/year_2023/day_10_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_2(input), 495);
+        assert_eq!(part_2(input), Some(495));
     }
 
     #[test]

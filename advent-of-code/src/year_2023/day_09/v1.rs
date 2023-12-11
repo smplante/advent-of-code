@@ -1,28 +1,32 @@
 use itertools::Itertools;
 
-pub fn part_1(input: &str) -> i32 {
-    input
-        .lines()
-        .map(|l| {
-            l.split_whitespace()
-                .map(|n| n.parse::<i32>().unwrap())
-                .collect_vec()
-        })
-        .map(find_next)
-        .sum()
+pub fn part_1(input: &str) -> Option<i32> {
+    Some(
+        input
+            .lines()
+            .map(|l| {
+                l.split_whitespace()
+                    .map(|n| n.parse::<i32>().unwrap())
+                    .collect_vec()
+            })
+            .map(find_next)
+            .sum(),
+    )
 }
 
-pub fn part_2(input: &str) -> i32 {
-    input
-        .lines()
-        .map(|l| {
-            l.split_whitespace()
-                .map(|n| n.parse::<i32>().unwrap())
-                .rev()
-                .collect_vec()
-        })
-        .map(find_next)
-        .sum()
+pub fn part_2(input: &str) -> Option<i32> {
+    Some(
+        input
+            .lines()
+            .map(|l| {
+                l.split_whitespace()
+                    .map(|n| n.parse::<i32>().unwrap())
+                    .rev()
+                    .collect_vec()
+            })
+            .map(find_next)
+            .sum(),
+    )
 }
 
 fn find_next(seq: Vec<i32>) -> i32 {
@@ -60,7 +64,7 @@ mod tests {
             .expect("src/year_2023/day_09_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_1(input), 1_696_140_818);
+        assert_eq!(part_1(input), Some(1_696_140_818));
     }
 
     #[test]
@@ -69,6 +73,6 @@ mod tests {
             .expect("src/year_2023/day_09_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_2(input), 1_152);
+        assert_eq!(part_2(input), Some(1_152));
     }
 }

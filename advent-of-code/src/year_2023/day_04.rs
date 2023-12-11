@@ -2,10 +2,10 @@ mod v1;
 
 aoc_pm::run!(2023, 04, 13, 30);
 
-pub fn part_1(input: &str) -> u32 {
+pub fn part_1(input: &str) -> Option<u32> {
     v1::part_1(input)
 }
-pub fn part_2(input: &str) -> u32 {
+pub fn part_2(input: &str) -> Option<u32> {
     v1::part_2(input)
 }
 
@@ -19,7 +19,7 @@ mod tests {
             .expect("src/year_2023/day_04_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_04::part_1(input), 13);
+        assert_eq!(day_04::part_1(input), Some(13));
     }
 
     #[test]
@@ -28,7 +28,7 @@ mod tests {
             .expect("src/year_2023/day_04_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_04::part_1(input), 22674);
+        assert_eq!(day_04::part_1(input), Some(22674));
     }
 
     #[test]
@@ -37,7 +37,7 @@ mod tests {
             .expect("src/year_2023/day_04_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_04::part_2(input), 30);
+        assert_eq!(day_04::part_2(input), Some(30));
     }
 
     #[test]
@@ -46,6 +46,6 @@ mod tests {
             .expect("src/year_2023/day_04_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_04::part_2(input), 5747443);
+        assert_eq!(day_04::part_2(input), Some(5747443));
     }
 }

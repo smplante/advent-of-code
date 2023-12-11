@@ -1,4 +1,4 @@
-pub fn part_1(input: &str) -> u32 {
+pub fn part_1(input: &str) -> Option<u32> {
     let lb = input.as_bytes();
     let mut width = None;
 
@@ -26,7 +26,7 @@ pub fn part_1(input: &str) -> u32 {
                     s = s * 10 + n as u32;
                 }
 
-                serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                serials[row].push((s, start_end?));
                 start_end = None;
                 num = Vec::new();
             }
@@ -41,7 +41,7 @@ pub fn part_1(input: &str) -> u32 {
                         s = s * 10 + n as u32;
                     }
 
-                    serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                    serials[row].push((s, start_end?));
                     start_end = None;
                     num = Vec::new();
                 }
@@ -57,22 +57,22 @@ pub fn part_1(input: &str) -> u32 {
                         s = s * 10 + n as u32;
                     }
 
-                    serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                    serials[row].push((s, start_end?));
                     start_end = None;
                     num = Vec::new();
                 }
 
-                parts.get_mut(row).unwrap().push((row, i))
+                parts[row].push((row, i))
             }
         }
     }
 
     for v in parts.iter() {
         for &(r, c) in v.iter() {
-            let row_to_check = serials.get_mut(r - 1).unwrap();
+            let row_to_check = serials.get_mut(r - 1)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     sum += row_to_check[pri].0;
                     to_remove.push(pri);
                 }
@@ -81,10 +81,10 @@ pub fn part_1(input: &str) -> u32 {
                 row_to_check.remove(i);
             }
 
-            let row_to_check = serials.get_mut(r).unwrap();
+            let row_to_check = serials.get_mut(r)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     sum += row_to_check[pri].0;
                     to_remove.push(pri);
                 }
@@ -93,10 +93,10 @@ pub fn part_1(input: &str) -> u32 {
                 row_to_check.remove(i);
             }
 
-            let row_to_check = serials.get_mut(r + 1).unwrap();
+            let row_to_check = serials.get_mut(r + 1)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     sum += row_to_check[pri].0;
                     to_remove.push(pri);
                 }
@@ -107,10 +107,10 @@ pub fn part_1(input: &str) -> u32 {
         }
     }
 
-    sum
+    Some(sum)
 }
 
-pub fn part_2(input: &str) -> u32 {
+pub fn part_2(input: &str) -> Option<u32> {
     let lb = input.as_bytes();
     let mut width = None;
 
@@ -138,7 +138,7 @@ pub fn part_2(input: &str) -> u32 {
                     s = s * 10 + n as u32;
                 }
 
-                serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                serials[row].push((s, start_end?));
                 start_end = None;
                 num = Vec::new();
             }
@@ -153,7 +153,7 @@ pub fn part_2(input: &str) -> u32 {
                         s = s * 10 + n as u32;
                     }
 
-                    serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                    serials[row].push((s, start_end?));
                     start_end = None;
                     num = Vec::new();
                 }
@@ -169,12 +169,12 @@ pub fn part_2(input: &str) -> u32 {
                         s = s * 10 + n as u32;
                     }
 
-                    serials.get_mut(row).unwrap().push((s, start_end.unwrap()));
+                    serials[row].push((s, start_end?));
                     start_end = None;
                     num = Vec::new();
                 }
 
-                parts.get_mut(row).unwrap().push((row, i))
+                parts[row].push((row, i))
             }
             _ => {}
         }
@@ -184,28 +184,28 @@ pub fn part_2(input: &str) -> u32 {
         for &(r, c) in v.iter() {
             let mut seen = Vec::new();
 
-            let row_to_check = serials.get_mut(r - 1).unwrap();
+            let row_to_check = serials.get_mut(r - 1)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     seen.push(row_to_check[pri].0);
                     to_remove.push(pri);
                 }
             }
 
-            let row_to_check = serials.get_mut(r).unwrap();
+            let row_to_check = serials.get_mut(r)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     seen.push(row_to_check[pri].0);
                     to_remove.push(pri);
                 }
             }
 
-            let row_to_check = serials.get_mut(r + 1).unwrap();
+            let row_to_check = serials.get_mut(r + 1)?;
             let mut to_remove = Vec::new();
             for pri in 0..row_to_check.len() {
-                if in_range_of_part(c, row_to_check[pri].1, width.unwrap()) {
+                if in_range_of_part(c, row_to_check[pri].1, width?) {
                     seen.push(row_to_check[pri].0);
                     to_remove.push(pri);
                 }
@@ -217,7 +217,7 @@ pub fn part_2(input: &str) -> u32 {
         }
     }
 
-    sum
+    Some(sum)
 }
 
 fn in_range_of_part(part_col: usize, s_col_span: (usize, usize), width: usize) -> bool {
@@ -245,15 +245,7 @@ mod tests {
             .expect("src/year_2023/day_03_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_03::part_1(input), 4361);
-    }
-    #[test]
-    fn part_1_sample_new() {
-        let d = Data::get("day_03_sample_2")
-            .expect("src/year_2023/day_03_sample_1 does not exist")
-            .data;
-        let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_03::part_1(input), 4361);
+        assert_eq!(day_03::part_1(input), Some(4361));
     }
 
     #[test]
@@ -262,7 +254,7 @@ mod tests {
             .expect("src/year_2023/day_03_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_03::part_1(input), 544433);
+        assert_eq!(day_03::part_1(input), Some(544433));
     }
 
     #[test]
@@ -271,7 +263,7 @@ mod tests {
             .expect("src/year_2023/day_03_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_03::part_2(input), 467835);
+        assert_eq!(day_03::part_2(input), Some(467835));
     }
 
     #[test]
@@ -280,6 +272,6 @@ mod tests {
             .expect("src/year_2023/day_03_sample_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(day_03::part_2(input), 76314915);
+        assert_eq!(day_03::part_2(input), Some(76314915));
     }
 }

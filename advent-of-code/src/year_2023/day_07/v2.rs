@@ -1,19 +1,21 @@
 use itertools::Itertools;
 
 /// # Panics
-pub fn part_1(input: &str) -> u32 {
-    input
-        .split('\n')
-        .filter_map(parse_line_to_card)
-        .sorted_by(|(lh, _), (rh, _)| lh.cmp(rh))
-        .enumerate()
-        .map(|(i, (_, v))| v * (i as u32 + 1))
-        .sum::<u32>()
+pub fn part_1(input: &str) -> Option<u32> {
+    Some(
+        input
+            .split('\n')
+            .map(parse_line_to_card)
+            .sorted_by(|(lh, _), (rh, _)| lh.cmp(rh))
+            .enumerate()
+            .map(|(i, (_, v))| v * (i as u32 + 1))
+            .sum::<u32>(),
+    )
 }
 
 type CardV2 = u32;
-fn parse_line_to_card(line: &str) -> Option<(CardV2, u32)> {
-    let (c, v) = line.split_once(' ')?;
+fn parse_line_to_card(line: &str) -> (CardV2, u32) {
+    let (c, v) = line.split_once(' ').unwrap();
     let mut seen = [0; 15];
     let card: CardV2 = c
         .as_bytes()
@@ -40,7 +42,8 @@ fn parse_line_to_card(line: &str) -> Option<(CardV2, u32)> {
             seen[c as usize] += 1;
             c
         })
-        .reduce(|acc, c| (acc << 4) + c)?;
+        .reduce(|acc, c| (acc << 4) + c)
+        .unwrap();
 
     let hand = seen.iter().filter(|&&c| c > 0).sorted().rev().collect_vec();
 
@@ -54,17 +57,19 @@ fn parse_line_to_card(line: &str) -> Option<(CardV2, u32)> {
         _ => card + (0 << 20),
     };
 
-    Some((card, v.parse::<u32>().ok()?))
+    (card, v.parse::<u32>().unwrap())
 }
 
-pub fn part_2(input: &str) -> u32 {
-    input
-        .split('\n')
-        .filter_map(parse_line_to_card_2)
-        .sorted_by(|(lh, _), (rh, _)| lh.cmp(rh))
-        .enumerate()
-        .map(|(i, (_, v))| v * (i as u32 + 1))
-        .sum::<u32>()
+pub fn part_2(input: &str) -> Option<u32> {
+    Some(
+        input
+            .split('\n')
+            .filter_map(parse_line_to_card_2)
+            .sorted_by(|(lh, _), (rh, _)| lh.cmp(rh))
+            .enumerate()
+            .map(|(i, (_, v))| v * (i as u32 + 1))
+            .sum::<u32>(),
+    )
 }
 pub fn parse_line_to_card_2(line: &str) -> Option<(CardV2, u32)> {
     let (c, v) = line.split_once(' ')?;
@@ -154,7 +159,7 @@ mod tests {
             .expect("src/year_2023/day_07_part_1 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_1(input), 248_836_197);
+        assert_eq!(part_1(input), Some(248_836_197));
     }
 
     #[test]
@@ -163,6 +168,6 @@ mod tests {
             .expect("src/year_2023/day_07_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_2(input), 251_195_607);
+        assert_eq!(part_2(input), Some(251_195_607));
     }
 }
