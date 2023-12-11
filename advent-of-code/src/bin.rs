@@ -7,7 +7,9 @@ fn initialize_rayon() {
 
     let num_threads = std::env::var("RAYON_NUM_THREADS")
         .ok()
-        .map_or(ignore_e_cores, |s| usize::from_str(&s).ok().unwrap_or(ignore_e_cores));
+        .map_or(ignore_e_cores, |s| {
+            usize::from_str(&s).ok().unwrap_or(ignore_e_cores)
+        });
 
     rayon::ThreadPoolBuilder::new()
         .num_threads(num_threads)

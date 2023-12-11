@@ -2,7 +2,7 @@ extern crate proc_macro;
 
 use itertools::Itertools;
 use proc_macro::{TokenStream, TokenTree};
-use regex::bytes::{Match, Regex};
+use regex::bytes::Regex;
 
 /// Returns the necessary `run` function
 ///
