@@ -26,6 +26,7 @@ fn criterion_benchmark(c: &mut Criterion) {
     benchmark!(2023, 15);
     benchmark!(2023, 16);
     // benchmark!(2023, 17);
+    benchmark!(2023, 18);
 }
 
 criterion_group!(benches, criterion_benchmark);
