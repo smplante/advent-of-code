@@ -471,6 +471,6 @@ mod tests {
             .expect("src/year_2023/day_12_part_2 does not exist")
             .data;
         let input = std::str::from_utf8(&d).expect("d must be a string");
-        assert_eq!(part_2(input), Some(0));
+        assert_eq!(part_2(input), Some(51_456_609_952_403));
     }
 }

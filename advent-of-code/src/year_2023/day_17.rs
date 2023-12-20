@@ -1,6 +1,6 @@
 mod v1;
 
-aoc_pm::run!(2023, 17, 102, 0);
+aoc_pm::run!(2023, 17, 102, 94);
 
 pub fn part_1(input: &str) -> Option<usize> {
     v1::part_1(input)
